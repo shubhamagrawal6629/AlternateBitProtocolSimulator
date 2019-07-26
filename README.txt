@@ -1,7 +1,3 @@
-hello how are you
-
-
-
 This folder contains a simulator for an ALTERNATE BIT PROTOCOL implemented in Cadmium
 
 /**************************/
