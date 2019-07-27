@@ -6,80 +6,90 @@ This folder contains a simulator for an ALTERNATE BIT PROTOCOL implemented in Ca
 
 README.txt	
 
-alternatebitprotocol.doc
+doc [This folder contains the documentation for the project]
+	alternatebitprot.pdf
+	Cadmium_Documentation_Ubuntu.pdf
+	Cadmium_Windows.pdf
 
-atomics [This folder contains the header files]
+include [This folder contains the header files]
+	message.hpp
 	receiverCadmium.hpp
 	senderCadmium.hpp
 	subnetCadmium.hpp
 
-data_structures [This folder contains the data structures used in the project]
-	message.hpp
+src [This folder contains the c++ files used in the project]
+	main.cpp
 	message.cpp
 
+data [This folder contains the data files for the simulator]
+	input
+		input_abp_0
+		input_abp_1
+	output
+		abp_output_0
+		abp_output_1
+	
 test [This folder the unit test for the different include files]
-	receiver [This folder contains the unit test of the receiver]
-		main.cpp
-		makefile
-		receiver_input_test.txt
-		receiver_test_output.txt
-	sender [This folder contains the unit test of the sender]
-		main.cpp
-		makefile
-		sender_input_test_ack_In.txt
-		sender_input_test_control_In.txt
-		sender_test_output.txt
-	subnet [This folder contains the unit test of the subnet]
-		main.cpp
-		makefile
-		subnet_input_test.txt
-		subnet_test_output.txt
+	data [This folder contains the data files for test folder]
+		receiver
+			receiver_input_test.txt
+			receiver_test_output.txt
+		sender
+			sender_input_test_ack_In.txt
+			sender_input_test_control_In.txt
+			sender_test_output.txt
+		subnet
+			subnet_input_test.txt
+			subnet_test_output.txt
+	src [This folder contains the c++ files for test folder]
+		receiver
+			main.cpp
+		sender
+			main.cpp
+		subnet
+			main.cpp
 
-vendor [This folder contains 3rd party header files needed in the project
-	iestream.hpp
-	NDTime.hpp
+lib [This folder contains 3rd party libraries needed in the project]
+	cadmium-master
+	DESTimes-master
+	vendor
+		iestream.hpp
+		NDTime.hpp
+	
 
-top_model [This folder contains source code for the Alternate Bit Protocol simulator
-some data for testing and some simulator outputs]	
-	main.cpp
-	makefile
-	input_abp_0.txt
-	input_abp_1.txt
-	abp_output_0.txt
-	abp_output_1.txt
 	
 /*************/
 /****STEPS****/
 /*************/
 
-0 - alternatebitprotocol.doc contains the explanation of this simulator
+0 - doc/alternatebitprot.pdf contains the explanation of this simulator
 
 1 - Update include paths in all the makefiles in this folder and subfolders. You need to update the following lines:
-	INCLUDECADMIUM=-I ../../cadmium/include
+	INCLUDECADMIUM=-I lib/cadmium-master/include
     Update the relative path to cadmium/include from the folder where the makefile is. You need to take into account where you copied the folder during the installation process
-	Example: INCLUDECADMIUM=-I ../../cadmium/include
+	Example: INCLUDECADMIUM=-I lib/cadmium-master/include
     
 2 - Run the unit tests
 	2.1. Run subnet test
-		1 - Open the terminal. Press in your keyboard Ctrl+Alt+t
-		2 - Set the command prompt in the test/subnet folder. To do so, type in the terminal the path to this folder.
-			Example: cd Documents/AlternateBitProtocol/test/subnet
+		1 - Open the terminal.
+		2 - Set the command prompt in the bin folder. To do so, type in the terminal the path to this folder.
+			Example: cd bin
 		3 - To compile the test, type in the terminal:
-			make clean; make all
+			make clean; make comp; make all
 		4 - To run the test, type in the terminal "./NAME_OF_THE_COMPILED_FILE". For this specific test you need to type:
 			./SUBNET
-		5 - To check the output of the test, open  "subnet_test_output.txt"
+		5 - To check the output of the test, open  "/test/data/subnetsubnet_test_output.txt"
 	2.2. To run receiver and sender tests, the steps are analogous to 2.1
 			
 3 - Run the simulator
-	1 - Open the terminal. Press in your keyboard Ctrl+Alt+t
-	2 - Set the command prompt in the top_model folder. To do so, type in the terminal the path to this folder.
-		Example: cd ../../top_model
+	1 - Open the terminal.
+	2 - Set the command prompt in the bin folder. To do so, type in the terminal the path to this folder.
+		Example: cd bin
 	3 - To compile the project, type in the terminal:
-		make clean; make all
+		make clean; make comp; make all
 	4 - To run the simulation, type in the terminal "./NAME_OF_THE_COMPILED_FILE NAME_OF_THE_INPUT_FILE". For this test you need to type:
-		./ABP input_abp_1.txt
-	5 - To check the output of the simulation, open  "abp_output.txt"
+		./ABP ../data/input/input_abp_1.txt
+	5 - To check the output of the simulation, open  "data/output/abp_output.txt"
 	6 - To execute the simulator with different inputs
 		6.1. Create new .txt files with the same structure as input_abp_0.txt or input_abp_1.txt
 		6.2. Run the simulator using the instructions in step 4
