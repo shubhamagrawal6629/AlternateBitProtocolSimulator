@@ -123,12 +123,12 @@ cadmium::dynamic::modeling::Ports iports_Network = {typeid(inp_1),typeid(inp_2)}
 cadmium::dynamic::modeling::Ports oports_Network = {typeid(outp_1),typeid(outp_2)};
 cadmium::dynamic::modeling::Models submodels_Network = {subnet1, subnet2};
 cadmium::dynamic::modeling::EICs eics_Network = {
-  cadmium::dynamic::translate::make_EIC<inp_1, Subnet_defs::in>("subnet1"),
-  cadmium::dynamic::translate::make_EIC<inp_2, Subnet_defs::in>("subnet2")
+  cadmium::dynamic::translate::make_EIC<inp_1, subnet_defs::in>("subnet1"),
+  cadmium::dynamic::translate::make_EIC<inp_2, subnet_defs::in>("subnet2")
 };
 cadmium::dynamic::modeling::EOCs eocs_Network = {
-  cadmium::dynamic::translate::make_EOC<Subnet_defs::out,outp_1>("subnet1"),
-cadmium::dynamic::translate::make_EOC<Subnet_defs::out,outp_2>("subnet2")
+  cadmium::dynamic::translate::make_EOC<subnet_defs::out,outp_1>("subnet1"),
+cadmium::dynamic::translate::make_EOC<subnet_defs::out,outp_2>("subnet2")
 };
 cadmium::dynamic::modeling::ICs ics_Network = {};
 std::shared_ptr<cadmium::dynamic::modeling::coupled<TIME>> NETWORK = std::make_shared<cadmium::dynamic::modeling::coupled<TIME>>(
