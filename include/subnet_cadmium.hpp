@@ -4,9 +4,8 @@
 *
 */
 
-#ifndef BOOST_SIMULATION_PDEVS_RECEIVER_HPP
-#define BOOST_SIMULATION_PDEVS_RECEIVER_HPP
-
+#ifndef BOOST_SIMULATION_PDEVS_SUBNET_HPP
+#define BOOST_SIMULATION_PDEVS_SUBNET_HPP
 
 #include <cadmium/modeling/ports.hpp>
 #include <cadmium/modeling/message_bag.hpp>
@@ -29,30 +28,30 @@ using namespace cadmium;
 using namespace std;
 
 //Port definition
-    struct Receiver_defs{
+    struct Subnet_defs{
         struct out : public out_port<Message_t> {
         };
         struct in : public in_port<Message_t> {
         };
     };
-   
+//This is a meta-model, it should be overloaded for declaring the "id" parameter
     template<typename TIME>
-    class Receiver{
-        using defs=Receiver_defs; // putting definitions in context
+    class Subnet{
+        using defs=Subnet_defs; // putting definitions in context
         public:
             //Parameters to be overwriten when instantiating the atomic model
-            TIME   preparationTime;
+           
             // default constructor
-            Receiver() noexcept{
-              preparationTime  = TIME("00:00:10");
-              state.ackNum    = 0;
-              state.sending     = false;
+            Subnet() noexcept{
+              state.transmiting     = false;
+              state.index           = 0;
             }
             
             // state definition
             struct state_type{
-              int ackNum;
-              bool sending;
+              bool transmiting;
+              int packet;
+              int index;
             }; 
             state_type state;
             // ports definition
@@ -61,17 +60,17 @@ using namespace std;
 
             // internal transition
             void internal_transition() {
-              state.sending = false; 
+                state.transmiting = false;  
             }
 
             // external transition
             void external_transition(TIME e, typename make_message_bags<input_ports>::type mbs) { 
-              if(get_messages<typename defs::in>(mbs).size()>1) assert(false && "one message per time uniti");
-              for(const auto &x : get_messages<typename defs::in>(mbs)){
-                state.ackNum = static_cast < int > (x.value);
-                state.sending = true;
-              }  
-                           
+                state.index ++;
+                if(get_messages<typename defs::in>(mbs).size()>1) assert(false && "One message at a time");                
+                for (const auto &x : get_messages<typename defs::in>(mbs)) {
+                  state.packet = static_cast < int > (x.value);
+                  state.transmiting = true; 
+                }               
             }
 
             // confluence transition
@@ -83,30 +82,32 @@ using namespace std;
             // output function
             typename make_message_bags<output_ports>::type output() const {
               typename make_message_bags<output_ports>::type bags;
-              Message_t out;              
-              out.value = state.ackNum % 10;
-              get_messages<typename defs::out>(bags).push_back(out);
-                
+              Message_t out;
+              if ((double)rand() / (double) RAND_MAX  < 0.95){
+                out.value = state.packet;
+                get_messages<typename defs::out>(bags).push_back(out);
+              }
               return bags;
-
             }
 
             // time_advance function
-            TIME time_advance() const {  
+            TIME time_advance() const {
+              std::default_random_engine generator;
+              std::normal_distribution<double> distribution(3.0, 1.0); 
               TIME next_internal;
-              if (state.sending) {
-                next_internal = preparationTime;
+              if (state.transmiting) {
+                std::initializer_list<int> time = {0, 0, static_cast < int > (round(distribution(generator)))};
+                // time is hour min and second
+                next_internal = TIME(time);
               }else {
                 next_internal = std::numeric_limits<TIME>::infinity();
               }    
               return next_internal;
             }
 
-            friend std::ostringstream& operator<<(std::ostringstream& os, const typename Receiver<TIME>::state_type& i) {
-                os << "ackNum: " << i.ackNum; 
+            friend std::ostringstream& operator<<(std::ostringstream& os, const typename Subnet<TIME>::state_type& i) {
+                os << "index: " << i.index << " & transmiting: " << i.transmiting; 
             return os;
             }
-        };     
-  
-
-#endif // BOOST_SIMULATION_PDEVS_RECEIVER_HPP
+        };    
+#endif // BOOST_SIMULATION_PDEVS_SUBNET_HPP

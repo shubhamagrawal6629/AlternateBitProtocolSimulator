@@ -10,17 +10,16 @@ using namespace std;
 /*******************************************/
 /**************** Message_t ****************/
 /*******************************************/
-struct Message_t{
-
-  Message_t(){}
-  Message_t(float i_value)
-   :value(i_value){}
+struct Message_t {
+    Message_t(){}
+    Message_t(float i_value)
+    :value(i_value){}
 
   	float   value;
 
-  void clear() {
-   Message_t(); 
-  }
+    void clear() {
+        Message_t(); 
+    }
 };
 
 istream& operator>> (istream& is, Message_t& msg);
