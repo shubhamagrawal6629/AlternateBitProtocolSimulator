@@ -109,7 +109,7 @@ class Subnet {
                 // time is hour min and second
                 next_internal = TIME(time);
             }
-			else {
+            else {
                 next_internal = std::numeric_limits<TIME>::infinity();
             }    
             return next_internal;
