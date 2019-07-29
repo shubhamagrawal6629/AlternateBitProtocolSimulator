@@ -85,18 +85,18 @@ class Sender {
                     state.model_active = true; 
                     state.next_internal = PREPARATION_TIME;   
                 } 
-				else {
+                else {
                     state.model_active = false;
                     state.next_internal = std::numeric_limits<TIME>::infinity();
                 }
             }
-			else {
+            else {
                 if (state.sending) {
                     state.sending = false;
                     state.model_active = true;
                     state.next_internal = TIMEOUT;
                 }
-				else {
+                else {
                     state.sending = true;
                     state.model_active = true;
                     state.next_internal = PREPARATION_TIME;    
