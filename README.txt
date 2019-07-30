@@ -1,3 +1,5 @@
+Just making sure that the merge is reviewed
+
 This folder contains a simulator for an ALTERNATE BIT PROTOCOL implemented in Cadmium
 
 /**************************/
