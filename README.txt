@@ -76,7 +76,7 @@ lib [This folder contains 3rd party libraries needed in the project]
 			Example: cd bin
 		3 - To compile the test, type in the terminal:
 			make clean; make comp; make all
-		4 - To run the test, type in the terminal "NAME_OF_THE_COMPILED_FILE". For this specific test you need to type:
+		4 - To run the test, type in the terminal "./NAME_OF_THE_COMPILED_FILE". For this specific test you need to type:
 			SUBNET_TEST
 		5 - To check the output of the test, open  "/test/data/subnet_test_output.txt"
 	2.2. To run receiver and sender tests, the steps are analogous to 2.1
@@ -87,8 +87,8 @@ lib [This folder contains 3rd party libraries needed in the project]
 		Example: cd bin
 	3 - To compile the project, type in the terminal:
 		make clean; make comp; make all
-	4 - To run the simulation, type in the terminal "NAME_OF_THE_COMPILED_FILE NAME_OF_THE_INPUT_FILE". For this test you need to type:
-		ABP ../data/input/input_abp_1.txt
+	4 - To run the simulation, type in the terminal "./NAME_OF_THE_COMPILED_FILE NAME_OF_THE_INPUT_FILE". For this test you need to type:
+		./ABP ../data/input/input_abp_1.txt
 	5 - To check the output of the simulation, open  "data/output/abp_output.txt"
 	6 - To execute the simulator with different inputs
 		6.1. Create new .txt files with the same structure as input_abp_0.txt or input_abp_1.txt
