@@ -87,8 +87,7 @@ lib [This folder contains 3rd party libraries needed in the project]
 		Example: cd bin
 	3 - To compile the project, type in the terminal:
 		make clean; make comp; make all
-	4 - To run the simulation, type in the terminal "./NAME_OF_THE_COMPILED_FILE NAME_OF_THE_INPUT_FILE".
-	For this test you need to type:
+	4 - To run the simulation, type in the terminal "./NAME_OF_THE_COMPILED_FILE NAME_OF_THE_INPUT_FILE". For this test you need to type:
 		./ABP ../data/input/input_abp_1.txt
 	5 - To check the output of the simulation, open  "data/output/abp_output.txt"
 	6 - To execute the simulator with different inputs
