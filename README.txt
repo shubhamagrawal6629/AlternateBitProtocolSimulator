@@ -6,6 +6,14 @@ This folder contains a simulator for an ALTERNATE BIT PROTOCOL implemented in Ca
 
 README.txt	
 
+data [This folder contains the data files for the simulator]
+	input
+		input_abp_0
+		input_abp_1
+	output
+		abp_output_0
+		abp_output_1
+
 doc [This folder contains the documentation for the project]
 	alternatebitprot.pdf
 	Cadmium_Documentation_Ubuntu.pdf
@@ -17,18 +25,19 @@ include [This folder contains the header files]
 	sender_cadmium.hpp
 	subnet_cadmium.hpp
 
-src [This folder contains the c++ files used in the project]
+lib [This folder contains 3rd party libraries needed in the project]
+	cadmium-master
+	DESTimes-master
+	vendor
+		iestream.hpp
+		nd_time.hpp
+
+src [This folder contains the source files written in c++ for the project]
 	main.cpp
 	message.cpp
 
-data [This folder contains the data files for the simulator]
-	input
-		input_abp_0
-		input_abp_1
-	output
-		abp_output_0
-		abp_output_1
-	
+
+
 test [This folder the unit test for the different include files]
 	data [This folder contains the data files for test folder]
 		receiver
@@ -41,7 +50,7 @@ test [This folder the unit test for the different include files]
 		subnet
 			subnet_input_test.txt
 			subnet_test_output.txt
-	src [This folder contains the c++ files for test folder]
+	src [This folder contains the source files written in c++ for test folder of the project]
 		receiver
 			main.cpp
 		sender
@@ -49,15 +58,7 @@ test [This folder the unit test for the different include files]
 		subnet
 			main.cpp
 
-lib [This folder contains 3rd party libraries needed in the project]
-	cadmium-master
-	DESTimes-master
-	vendor
-		iestream.hpp
-		nd_time.hpp
-	
 
-	
 /*************/
 /****STEPS****/
 /*************/
@@ -68,7 +69,7 @@ lib [This folder contains 3rd party libraries needed in the project]
 	INCLUDECADMIUM=-I lib/cadmium-master/include
     Update the relative path to cadmium/include from the folder where the makefile is. You need to take into account where you copied the folder during the installation process
 	Example: INCLUDECADMIUM=-I lib/cadmium-master/include
-    
+
 2 - Run the unit tests
 	2.1. Run subnet test
 		1 - Open the terminal.
@@ -76,19 +77,19 @@ lib [This folder contains 3rd party libraries needed in the project]
 			Example: cd bin
 		3 - To compile the test, type in the terminal:
 			make clean; make comp; make all
-		4 - To run the test, type in the terminal "NAME_OF_THE_COMPILED_FILE". For this specific test you need to type:
-			SUBNET_TEST
+		4 - To run the test, type in the terminal "./NAME_OF_THE_COMPILED_FILE". For this specific test you need to type:
+			./SUBNET_TEST
 		5 - To check the output of the test, open  "/test/data/subnet_test_output.txt"
 	2.2. To run receiver and sender tests, the steps are analogous to 2.1
-			
+
 3 - Run the simulator
 	1 - Open the terminal.
 	2 - Set the command prompt in the bin folder. To do so, type in the terminal the path to this folder.
 		Example: cd bin
 	3 - To compile the project, type in the terminal:
 		make clean; make comp; make all
-	4 - To run the simulation, type in the terminal "NAME_OF_THE_COMPILED_FILE NAME_OF_THE_INPUT_FILE". For this test you need to type:
-		ABP ../data/input/input_abp_1.txt
+	4 - To run the simulation, type in the terminal "./NAME_OF_THE_COMPILED_FILE NAME_OF_THE_INPUT_FILE". For this test you need to type:
+		./ABP ../data/input/input_abp_1.txt
 	5 - To check the output of the simulation, open  "data/output/abp_output.txt"
 	6 - To execute the simulator with different inputs
 		6.1. Create new .txt files with the same structure as input_abp_0.txt or input_abp_1.txt
