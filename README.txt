@@ -8,11 +8,11 @@ README.txt
 
 data [This folder contains the data files for the simulator]
 	input
-		input_abp_0
-		input_abp_1
+		input_abp_0.txt
+		input_abp_1.txt
 	output
-		abp_output_0
-		abp_output_1
+		abp_output_0.txt
+		abp_output_1.txt
 
 doc [This folder contains the documentation for the project]
 	alternatebitprot.pdf
@@ -80,7 +80,7 @@ test [This folder the unit test for the different include files]
 		4 - Once inside the bin folder, type in the terminal "./NAME_OF_THE_COMPILED_FILE". For this specific test you need to 
 		    type:
 			    ./SUBNET_TEST
-		5 - To check the output of the test, open  "/test/data/subnet_test_output.txt"
+		5 - To check the output of the test, open  "../test/data/subnet_test_output.txt"
 	2.2. To run receiver and sender tests, the steps are analogous to 2.1
 
 3 - Run the simulator
@@ -92,10 +92,13 @@ test [This folder the unit test for the different include files]
 	4 - Once inside Bin folder, type in the terminal "./NAME_OF_THE_COMPILED_FILE NAME_OF_THE_INPUT_FILE". For this test you need to 
 	    type:
 		    ./ABP ../data/input/input_abp_1.txt
-	5 - To check the output of the simulation, open  "data/output/abp_output.txt"
+	5 - To check the output of the simulation, open  "../data/output/abp_output.txt"
 	6 - To execute the simulator with different inputs
 		6.1. Create new .txt files with the same structure as input_abp_0.txt or input_abp_1.txt
 		6.2. Run the simulator using the instructions in step 4
-		6.3. If you want to keep the output, rename abp_output.txt. To do so, type in the terminal: "mv abp_output.txt NEW_NAME"
-			Example: mv abp_output.txt abp_output_0.txt
+		6.3. If you want to keep the output, rename abp_output.txt. To do so, move to the data/output folder by typing
+		        cd ../data/output
+		     in the terminal and then type :
+		        "mv abp_output.txt NEW_NAME"
+        	 Example: mv abp_output.txt abp_output_0.txt
 
