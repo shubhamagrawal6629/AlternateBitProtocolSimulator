@@ -36,8 +36,6 @@ src [This folder contains the source files written in c++ for the project]
 	main.cpp
 	message.cpp
 
-
-
 test [This folder the unit test for the different include files]
 	data [This folder contains the data files for test folder]
 		receiver
@@ -85,9 +83,9 @@ test [This folder the unit test for the different include files]
 
 3 - Run the simulator
 	1 - Open the terminal.
-	3 - To compile the project, type in the terminal:
+	2 - To compile the project, type in the terminal:
     		make clean; make comp; make all
-	2 - To run the simulation set the command prompt in the bin folder. To do so, type in the terminal the path to this folder.
+	3 - To run the simulation set the command prompt in the bin folder. To do so, type in the terminal the path to this folder.
 		Example: cd bin
 	4 - Once inside Bin folder, type in the terminal "./NAME_OF_THE_COMPILED_FILE NAME_OF_THE_INPUT_FILE". For this test you need to 
 	    type:
