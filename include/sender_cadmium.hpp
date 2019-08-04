@@ -70,10 +70,11 @@ class Sender {
             
 	    // ports definition
         using input_ports=std::tuple<typename defs::control_in,
-		                             typename defs::ack_in>;
+            typename defs::ack_in>;
         using output_ports=std::tuple<typename defs::packet_sent_out,
-		                             typename defs::ack_received_out,
-	                                     typename defs::data_out>;
+	    typename defs::ack_received_out,
+	        typename defs::data_out>;
+		
         // internal transition
         void internal_transition() {
             if (state.ack) {
@@ -88,7 +89,7 @@ class Sender {
                 else {
                     state.model_active = false;
                     state.next_internal = 
-			std::numeric_limits<TIME>::infinity();
+	                std::numeric_limits<TIME>::infinity();
                 }
             }
             else {
@@ -107,27 +108,27 @@ class Sender {
 
         // external transition
         void external_transition(
-		                TIME e,
-	                        typename
-				make_message_bags<input_ports>::type mbs) { 
+	    TIME e,
+	        typename
+		    make_message_bags<input_ports>::type mbs) { 
             if((get_messages<typename defs::control_in>(mbs).size()
-				+get_messages<typename defs::ack_in>(mbs).size()) > 1) 
+	        +get_messages<typename defs::ack_in>(mbs).size()) > 1) 
                 assert(false && "one message per time uniti");
             for(const auto &x :
-			        get_messages<typename defs::control_in>(mbs)) {
+	        get_messages<typename defs::control_in>(mbs)) {
                 if (state.model_active == false) {
                     state.total_packet_num = static_cast < int > (x.value);
                     if (state.total_packet_num > 0) {
                         state.packet_num = 1;
                         state.ack = false;
                         state.sending = true;
-						//set initial alt_bit
+			//set initial alt_bit
                         state.alt_bit = state.packet_num % 2;
                         state.model_active = true;
                         state.next_internal = PREPARATION_TIME;
                     }
 		    else if (state.next_internal != 
-                                 std::numeric_limits<TIME>::infinity()) {
+                        std::numeric_limits<TIME>::infinity()) {
                         state.next_internal = state.next_internal - e;
                     }
                 }
@@ -140,7 +141,7 @@ class Sender {
                         state.next_internal = TIME("00:00:00");
                     }
                     else if(state.next_internal !=
-                                 std::numeric_limits<TIME>::infinity()) {
+                        std::numeric_limits<TIME>::infinity()) {
                         state.next_internal = state.next_internal - e;
                     }
                 }
@@ -149,8 +150,8 @@ class Sender {
 
         // confluence transition
         void confluence_transition(
-		            TIME e,
-                            typename make_message_bags<input_ports>::type mbs) {
+            TIME e,
+                typename make_message_bags<input_ports>::type mbs) {
             internal_transition();
             external_transition(TIME(), std::move(mbs));
         }
@@ -164,7 +165,7 @@ class Sender {
                 get_messages<typename defs::data_out>(bags).push_back(out);
                 out.value = state.packet_num;
                 get_messages<typename
-                               defs::packet_sent_out>(bags).push_back(out);
+                    defs::packet_sent_out>(bags).push_back(out);
             }
             else if (state.ack) {
                 out.value = state.alt_bit;
@@ -180,7 +181,7 @@ class Sender {
         }
 
         friend std::ostringstream& operator<<(std::ostringstream& os,
-		                   const typename Sender<TIME>::state_type& i) {
+            const typename Sender<TIME>::state_type& i) {
             os << "packetNum: " << i.packet_num << 
             " & totalPacketNum: " << i.total_packet_num; 
             return os;
