@@ -75,7 +75,7 @@ test [This folder the unit test for the different include files]
         			make clean; make comp; make all
 		2 - To run the test set the command prompt in the bin folder. To do so, type in the terminal the path to this folder.
 			Example: cd bin
-		4 - Once inside the bin folder, type in the terminal "./NAME_OF_THE_COMPILED_FILE". For this specific test you need to
+		4 - Once inside the bin folder, type in the terminal "./NAME_OF_THE_COMPILED_FILE". For this specific test you need to 
 		    type:
 			    ./SUBNET_TEST
 		5 - To check the output of the test, open  "../test/data/subnet_test_output.txt"
@@ -87,7 +87,7 @@ test [This folder the unit test for the different include files]
     		make clean; make comp; make all
 	3 - To run the simulation set the command prompt in the bin folder. To do so, type in the terminal the path to this folder.
 		Example: cd bin
-	4 - Once inside Bin folder, type in the terminal "./NAME_OF_THE_COMPILED_FILE NAME_OF_THE_INPUT_FILE". For this test you need to
+	4 - Once inside Bin folder, type in the terminal "./NAME_OF_THE_COMPILED_FILE NAME_OF_THE_INPUT_FILE". For this test you need to 
 	    type:
 		    ./ABP ../data/input/input_abp_1.txt
 	5 - To check the output of the simulation, open  "../data/output/abp_output.txt"
@@ -99,4 +99,5 @@ test [This folder the unit test for the different include files]
 		     in the terminal and then type :
 		        "mv abp_output.txt NEW_NAME"
         	 Example: mv abp_output.txt abp_output_0.txt
+
 
