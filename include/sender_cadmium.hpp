@@ -87,7 +87,8 @@ class Sender {
                 } 
                 else {
                     state.model_active = false;
-                    state.next_internal = std::numeric_limits<TIME>::infinity();
+                    state.next_internal = 
+					            std::numeric_limits<TIME>::infinity();
                 }
             }
             else {
@@ -107,11 +108,13 @@ class Sender {
         // external transition
         void external_transition(
 		                TIME e,
-	                        typename make_message_bags<input_ports>::type mbs) { 
+	                        typename
+							    make_message_bags<input_ports>::type mbs) { 
             if((get_messages<typename defs::control_in>(mbs).size()
 				+get_messages<typename defs::ack_in>(mbs).size()) > 1) 
                 assert(false && "one message per time uniti");
-            for(const auto &x : get_messages<typename defs::control_in>(mbs)) {
+            for(const auto &x :
+			        get_messages<typename defs::control_in>(mbs)) {
                 if (state.model_active == false) {
                     state.total_packet_num = static_cast < int > (x.value);
                     if (state.total_packet_num > 0) {
@@ -147,7 +150,7 @@ class Sender {
         // confluence transition
         void confluence_transition(
 		            TIME e,
-                            typename make_message_bags<input_ports>::type mbs) {
+                    typename make_message_bags<input_ports>::type mbs) {
             internal_transition();
             external_transition(TIME(), std::move(mbs));
         }
