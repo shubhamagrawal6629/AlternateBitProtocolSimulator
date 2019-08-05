@@ -71,7 +71,7 @@ class Subnet {
 	    TIME e,
 	        typename make_message_bags<input_ports>::type mbs) { 
             state.index ++;
-            if(get_messages<typename defs::in>(mbs).size() > 1)
+            if (get_messages<typename defs::in>(mbs).size() > 1)
                 assert(false && "One message at a time");                
             for (const auto &x : get_messages<typename defs::in>(mbs)) {
                 state.packet = static_cast < int > (x.value);
