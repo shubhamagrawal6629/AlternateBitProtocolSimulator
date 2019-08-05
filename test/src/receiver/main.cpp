@@ -124,10 +124,10 @@ int main(){
     /************************/
     cadmium::dynamic::modeling::Ports iports_TOP = {};
     cadmium::dynamic::modeling::Ports oports_TOP = {
-            typeid(outp)
+        typeid(outp)
     };
     cadmium::dynamic::modeling::Models submodels_TOP = {
-            generator, receiver1
+        generator, receiver1
     };
     cadmium::dynamic::modeling::EICs eics_TOP = {};
     cadmium::dynamic::modeling::EOCs eocs_TOP = {
