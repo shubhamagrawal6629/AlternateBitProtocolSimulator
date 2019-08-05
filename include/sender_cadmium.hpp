@@ -68,7 +68,7 @@ class Sender {
         }; 
         state_type state;
             
-	    // ports definition
+	// ports definition
         using input_ports=std::tuple<typename defs::control_in,
             typename defs::ack_in>;
         using output_ports=std::tuple<typename defs::packet_sent_out,
@@ -111,10 +111,10 @@ class Sender {
 	    TIME e,
 	        typename
 		    make_message_bags<input_ports>::type mbs) { 
-            if((get_messages<typename defs::control_in>(mbs).size()
+            if ((get_messages<typename defs::control_in>(mbs).size()
 	        +get_messages<typename defs::ack_in>(mbs).size()) > 1) 
                 assert(false && "one message per time uniti");
-            for(const auto &x :
+            for (const auto &x :
 	        get_messages<typename defs::control_in>(mbs)) {
                 if (state.model_active == false) {
                     state.total_packet_num = static_cast < int > (x.value);
@@ -183,7 +183,7 @@ class Sender {
         friend std::ostringstream& operator<<(std::ostringstream& os,
             const typename Sender<TIME>::state_type& i) {
             os << "packetNum: " << i.packet_num << 
-            " & totalPacketNum: " << i.total_packet_num; 
+                " & totalPacketNum: " << i.total_packet_num; 
             return os;
         }
 };     
