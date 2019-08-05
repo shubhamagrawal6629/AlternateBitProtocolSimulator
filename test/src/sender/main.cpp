@@ -169,7 +169,7 @@ int main() {
 
     auto elapsed1 = std::chrono::duration_cast<std::chrono::duration
         <double,std::ratio<1>>> (hclock::now() - start).count();
-    cout <<"Model Created. Elapsed time: "<<elapsed1<<"sec"<< endl;
+    cout<<"Model Created. Elapsed time: "<<elapsed1<<"sec"<< endl;
     
     cadmium::dynamic::engine::runner<NDTime, logger_top> r(TOP, {0});
     elapsed1 = std::chrono::duration_cast<std::chrono::duration
