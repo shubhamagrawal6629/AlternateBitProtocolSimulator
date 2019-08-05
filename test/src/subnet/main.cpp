@@ -123,9 +123,7 @@ int main() {
     /************************/
     /*******TOP MODEL********/
     /************************/
-    cadmium::dynamic::modeling::Ports iports_TOP = {
-
-    };
+    cadmium::dynamic::modeling::Ports iports_TOP = {};
     cadmium::dynamic::modeling::Ports oports_TOP = {
         typeid(outp_out)
     };
