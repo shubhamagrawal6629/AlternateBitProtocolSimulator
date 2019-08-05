@@ -111,7 +111,7 @@ int main() {
 
     std::shared_ptr<cadmium::dynamic::modeling::model>generator_con =
         cadmium::dynamic::translate::make_dynamic_atomic_model
-            <ApplicationGen, TIME, const char* >(
+            <ApplicationGen, TIME, const char*>(
                 "generator_con" , std::move(i_input_data_control));
 
     string input_data_ack =
@@ -120,7 +120,7 @@ int main() {
 
     std::shared_ptr<cadmium::dynamic::modeling::model> generator_ack =
         cadmium::dynamic::translate::make_dynamic_atomic_model
-            <ApplicationGen, TIME, const char* >(
+            <ApplicationGen, TIME, const char*>(
                 "generator_ack" , std::move(i_input_data_ack));
 
 
@@ -169,14 +169,14 @@ int main() {
 
     auto elapsed1 = std::chrono::duration_cast<std::chrono::duration
         <double,std::ratio<1>>> (hclock::now() - start).count();
-    cout<<"Model Created. Elapsed time: "<<elapsed1<<"sec"<< endl;
+    cout<<"Model Created. Elapsed time: "<<elapsed1<<"sec"<<endl;
     
     cadmium::dynamic::engine::runner<NDTime, logger_top> r(TOP, {0});
     elapsed1 = std::chrono::duration_cast<std::chrono::duration
         <double, std::ratio<1>>> (hclock::now() - start).count();
-    cout<<"Runner Created. Elapsed time: "<<elapsed1<<"sec"<< endl;
+    cout<<"Runner Created. Elapsed time: "<<elapsed1<<"sec"<<endl;
 
-    cout<<"Simulation starts"<< endl;
+    cout<<"Simulation starts"<<endl;
 
     r.run_until(NDTime("04:00:00:000"));
     auto elapsed = std::chrono::duration_cast<std::chrono::duration
