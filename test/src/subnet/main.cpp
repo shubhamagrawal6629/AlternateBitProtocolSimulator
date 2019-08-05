@@ -130,9 +130,7 @@ int main() {
     cadmium::dynamic::modeling::Models submodels_TOP = {
         generator, subnet1
     };
-    cadmium::dynamic::modeling::EICs eics_TOP = {
-
-    };
+    cadmium::dynamic::modeling::EICs eics_TOP = {};
     cadmium::dynamic::modeling::EOCs eocs_TOP = {
         cadmium::dynamic::translate::make_EOC<subnet_defs::out,outp_out>
             ("subnet1")
