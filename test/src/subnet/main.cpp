@@ -103,11 +103,11 @@ int main() {
     /********************************************/
     string input_data =
         "../test/data/subnet/subnet_input_test.txt";
-    const char * i_input_data = input_data.c_str();
+    const char* i_input_data = input_data.c_str();
 
     std::shared_ptr<cadmium::dynamic::modeling::model> generator =
         cadmium::dynamic::translate::make_dynamic_atomic_model
-            <ApplicationGen, TIME, const char* >
+            <ApplicationGen, TIME, const char*>
                 ("generator" , std::move(i_input_data));
 
 
@@ -148,12 +148,12 @@ int main() {
 
     auto elapsed1 = std::chrono::duration_cast<std::chrono::duration
         <double, std::ratio<1>>>(hclock::now() - start).count();
-    cout<<"Model Created. Elapsed time: "<<elapsed1<<"sec"<< endl;
+    cout<<"Model Created. Elapsed time: "<<elapsed1<<"sec"<<endl;
     
     cadmium::dynamic::engine::runner<NDTime, logger_top> r(TOP, {0});
     elapsed1 = std::chrono::duration_cast<std::chrono::duration
         <double, std::ratio<1>>> (hclock::now() - start).count();
-    cout<<"Runner Created. Elapsed time: "<<elapsed1<<"sec"<< endl;
+    cout<<"Runner Created. Elapsed time: "<<elapsed1<<"sec"<<endl;
 
     cout<<"Simulation starts"<<endl;
 
