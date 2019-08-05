@@ -28,10 +28,10 @@ using TIME = NDTime;
 
 
 /***** SETING INPUT PORTS FOR COUPLEDs *****/
-struct inp : public cadmium::in_port<Message_t>{};
+struct inp : public cadmium::in_port<Message_t> {};
 
 /***** SETING OUTPUT PORTS FOR COUPLEDs *****/
-struct outp : public cadmium::out_port<Message_t>{};
+struct outp : public cadmium::out_port<Message_t> {};
 
 
 /********************************************/
@@ -47,7 +47,7 @@ class ApplicationGen : public iestream_input<Message_t,T> {
 };
 
 
-int main(){
+int main() {
     auto start = hclock::now(); //to measure simulation execution time
 
     /*************** Loggers *******************/
