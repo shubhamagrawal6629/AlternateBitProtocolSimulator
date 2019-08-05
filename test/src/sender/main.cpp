@@ -45,20 +45,20 @@ class ApplicationGen : public iestream_input<Message_t,T> {
     public:
         ApplicationGen() = default;
         ApplicationGen(const char* file_path) :
-            iestream_input<Message_t,T>(file_path){
+            iestream_input<Message_t,T>(file_path) {
     }
 };
 
 
-int main(){
+int main() {
 
     auto start = hclock::now(); //to measure simulation execution time
 
     /*************** Loggers *******************/
     static std::ofstream out_data(
         "../test/data/sender/sender_test_output.txt");
-    struct oss_sink_provider{
-        static std::ostream& sink(){
+    struct oss_sink_provider {
+        static std::ostream& sink() {
             return out_data;
         }
     };
