@@ -23,19 +23,15 @@
 
 using namespace std;
 
-using hclock=chrono::high_resolution_clock;
+using hclock = chrono::high_resolution_clock;
 using TIME = NDTime;
 
 
 /***** SETING INPUT PORTS FOR COUPLEDs *****/
-struct inp : public cadmium::in_port<Message_t>{
-
-};
+struct inp : public cadmium::in_port<Message_t>{};
 
 /***** SETING OUTPUT PORTS FOR COUPLEDs *****/
-struct outp : public cadmium::out_port<Message_t>{
-
-};
+struct outp : public cadmium::out_port<Message_t>{};
 
 
 /********************************************/
@@ -47,7 +43,6 @@ class ApplicationGen : public iestream_input<Message_t,T> {
         ApplicationGen() = default;
         ApplicationGen(const char* file_path) :
                 iestream_input<Message_t,T>(file_path) {
-
     }
 };
 
@@ -127,18 +122,14 @@ int main(){
     /************************/
     /*******TOP MODEL********/
     /************************/
-    cadmium::dynamic::modeling::Ports iports_TOP = {
-
-    };
+    cadmium::dynamic::modeling::Ports iports_TOP = {};
     cadmium::dynamic::modeling::Ports oports_TOP = {
             typeid(outp)
     };
     cadmium::dynamic::modeling::Models submodels_TOP = {
             generator, receiver1
     };
-    cadmium::dynamic::modeling::EICs eics_TOP = {
-
-    };
+    cadmium::dynamic::modeling::EICs eics_TOP = {};
     cadmium::dynamic::modeling::EOCs eocs_TOP = {
         cadmium::dynamic::translate::make_EOC
             <receiver_defs::out,outp>("receiver1")
@@ -156,19 +147,19 @@ int main(){
     ///****************////
 
     auto elapsed1 = std::chrono::duration_cast<std::chrono::duration
-        <double,std::ratio<1>>>(hclock::now() - start).count();
-    cout << "Model Created. Elapsed time: " << elapsed1 << "sec" << endl;
+        <double,std::ratio<1>>> (hclock::now() - start).count();
+    cout<<"Model Created. Elapsed time: "<<elapsed1<<"sec"<< endl;
     
     cadmium::dynamic::engine::runner<NDTime, logger_top> r(TOP, {0});
     elapsed1 = std::chrono::duration_cast<std::chrono::duration
-        <double,std::ratio<1>>>(hclock::now() - start).count();
-    cout << "Runner Created. Elapsed time: " << elapsed1 << "sec" << endl;
+        <double,std::ratio<1>>> (hclock::now() - start).count();
+    cout<<"Runner Created. Elapsed time: "<<elapsed1<<"sec"<<endl;
 
-    cout << "Simulation starts" << endl;
+    cout<<"Simulation starts"<<endl;
 
     r.run_until(NDTime("04:00:00:000"));
     auto elapsed = std::chrono::duration_cast<std::chrono::duration
-        <double, std::ratio<1>>>(hclock::now() - start).count();
-    cout << "Simulation took:" << elapsed << "sec" << endl;
+        <double, std::ratio<1>>> (hclock::now() - start).count();
+    cout<<"Simulation took:"<<elapsed<<"sec"<<endl;
     return 0;
 }
