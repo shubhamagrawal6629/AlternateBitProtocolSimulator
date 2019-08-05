@@ -23,19 +23,15 @@
 
 using namespace std;
 
-using hclock=chrono::high_resolution_clock;
+using hclock = chrono::high_resolution_clock;
 using TIME = NDTime;
 
 
 /***** SETING INPUT PORTS FOR COUPLEDs *****/
-struct inp_in : public cadmium::in_port<Message_t>{
-
-};
+struct inp_in : public cadmium::in_port<Message_t> {};
 
 /***** SETING OUTPUT PORTS FOR COUPLEDs *****/
-struct outp_out: public cadmium::out_port<Message_t>{
-
-};
+struct outp_out: public cadmium::out_port<Message_t> {};
 
 /********************************************/
 /****** APPLICATION GENERATOR *******************/
@@ -58,7 +54,7 @@ int main(){
     static std::ofstream out_data(
         "../test/data/subnet/subnet_test_output.txt");
     struct oss_sink_provider{
-        static std::ostream& sink(){
+        static std::ostream& sink() {
             return out_data;
         }
     };
@@ -156,18 +152,18 @@ int main(){
 
     auto elapsed1 = std::chrono::duration_cast<std::chrono::duration
         <double, std::ratio<1>>>(hclock::now() - start).count();
-    cout << "Model Created. Elapsed time: " << elapsed1 << "sec" << endl;
+    cout<<"Model Created. Elapsed time: "<<elapsed1<<"sec"<< endl;
     
     cadmium::dynamic::engine::runner<NDTime, logger_top> r(TOP, {0});
     elapsed1 = std::chrono::duration_cast<std::chrono::duration
-        <double, std::ratio<1>>>(hclock::now() - start).count();
-    cout << "Runner Created. Elapsed time: " << elapsed1 << "sec" << endl;
+        <double, std::ratio<1>>> (hclock::now() - start).count();
+    cout<<"Runner Created. Elapsed time: "<<elapsed1<<"sec"<< endl;
 
-    cout << "Simulation starts" << endl;
+    cout<<"Simulation starts"<<endl;
 
     r.run_until(NDTime("04:00:00:000"));
     auto elapsed = std::chrono::duration_cast<std::chrono::duration
-        <double, std::ratio<1>>>(hclock::now() - start).count();
-    cout << "Simulation took:" << elapsed << "sec" << endl;
+        <double, std::ratio<1>>> (hclock::now() - start).count();
+    cout<<"Simulation took:"<<elapsed<<"sec"<<endl;
     return 0;
 }
