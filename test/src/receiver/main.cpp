@@ -107,7 +107,7 @@ int main(){
 
     std::shared_ptr<cadmium::dynamic::modeling::model>
         generator = cadmium::dynamic::translate::make_dynamic_atomic_model
-            <ApplicationGen, TIME,const char* >
+            <ApplicationGen, TIME, const char* >
                 ("generator" , std::move(i_input_data_control));
 
     /********************************************/
@@ -132,7 +132,7 @@ int main(){
     cadmium::dynamic::modeling::EICs eics_TOP = {};
     cadmium::dynamic::modeling::EOCs eocs_TOP = {
         cadmium::dynamic::translate::make_EOC
-            <receiver_defs::out,outp>("receiver1")
+            <receiver_defs::out, outp>("receiver1")
     };
     cadmium::dynamic::modeling::ICs ics_TOP = {
         cadmium::dynamic::translate::make_IC
@@ -141,8 +141,8 @@ int main(){
     };
     std::shared_ptr<cadmium::dynamic::modeling::coupled<TIME>> TOP =
         std::make_shared<cadmium::dynamic::modeling::coupled<TIME>>(
-            "TOP",submodels_TOP,iports_TOP,
-                oports_TOP,eics_TOP,eocs_TOP,ics_TOP);
+            "TOP", submodels_TOP, iports_TOP,
+                oports_TOP, eics_TOP, eocs_TOP, ics_TOP);
 
     ///****************////
 
