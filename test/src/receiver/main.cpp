@@ -23,19 +23,15 @@
 
 using namespace std;
 
-using hclock=chrono::high_resolution_clock;
+using hclock = chrono::high_resolution_clock;
 using TIME = NDTime;
 
 
 /***** SETING INPUT PORTS FOR COUPLEDs *****/
-struct inp : public cadmium::in_port<Message_t>{
-
-};
+struct inp : public cadmium::in_port<Message_t> {};
 
 /***** SETING OUTPUT PORTS FOR COUPLEDs *****/
-struct outp : public cadmium::out_port<Message_t>{
-
-};
+struct outp : public cadmium::out_port<Message_t> {};
 
 
 /********************************************/
@@ -44,16 +40,14 @@ struct outp : public cadmium::out_port<Message_t>{
 template<typename T>
 class ApplicationGen : public iestream_input<Message_t,T> {
     public:
-    ApplicationGen() = default;
-    ApplicationGen(
-        const char* file_path) :
-        iestream_input<Message_t,T>(file_path) {
-
+        ApplicationGen() = default;
+        ApplicationGen(const char* file_path) :
+                iestream_input<Message_t,T>(file_path) {
     }
 };
 
 
-int main(){
+int main() {
     auto start = hclock::now(); //to measure simulation execution time
 
     /*************** Loggers *******************/
@@ -113,7 +107,7 @@ int main(){
 
     std::shared_ptr<cadmium::dynamic::modeling::model>
         generator = cadmium::dynamic::translate::make_dynamic_atomic_model
-            <ApplicationGen, TIME,const char* >
+            <ApplicationGen, TIME, const char* >
                 ("generator" , std::move(i_input_data_control));
 
     /********************************************/
@@ -128,21 +122,17 @@ int main(){
     /************************/
     /*******TOP MODEL********/
     /************************/
-    cadmium::dynamic::modeling::Ports iports_TOP = {
-
-    };
+    cadmium::dynamic::modeling::Ports iports_TOP = {};
     cadmium::dynamic::modeling::Ports oports_TOP = {
-            typeid(outp)
+        typeid(outp)
     };
     cadmium::dynamic::modeling::Models submodels_TOP = {
-            generator, receiver1
+        generator, receiver1
     };
-    cadmium::dynamic::modeling::EICs eics_TOP = {
-
-    };
+    cadmium::dynamic::modeling::EICs eics_TOP = {};
     cadmium::dynamic::modeling::EOCs eocs_TOP = {
         cadmium::dynamic::translate::make_EOC
-            <receiver_defs::out,outp>("receiver1")
+            <receiver_defs::out, outp>("receiver1")
     };
     cadmium::dynamic::modeling::ICs ics_TOP = {
         cadmium::dynamic::translate::make_IC
@@ -151,25 +141,25 @@ int main(){
     };
     std::shared_ptr<cadmium::dynamic::modeling::coupled<TIME>> TOP =
         std::make_shared<cadmium::dynamic::modeling::coupled<TIME>>(
-            "TOP",submodels_TOP,iports_TOP,
-                oports_TOP,eics_TOP,eocs_TOP,ics_TOP);
+            "TOP", submodels_TOP, iports_TOP,
+                oports_TOP, eics_TOP, eocs_TOP, ics_TOP);
 
     ///****************////
 
     auto elapsed1 = std::chrono::duration_cast<std::chrono::duration
-        <double,std::ratio<1>>>(hclock::now() - start).count();
-    cout << "Model Created. Elapsed time: " << elapsed1 << "sec" << endl;
+        <double,std::ratio<1>>> (hclock::now() - start).count();
+    cout<<"Model Created. Elapsed time: "<<elapsed1<<"sec"<< endl;
     
     cadmium::dynamic::engine::runner<NDTime, logger_top> r(TOP, {0});
     elapsed1 = std::chrono::duration_cast<std::chrono::duration
-        <double,std::ratio<1>>>(hclock::now() - start).count();
-    cout << "Runner Created. Elapsed time: " << elapsed1 << "sec" << endl;
+        <double,std::ratio<1>>> (hclock::now() - start).count();
+    cout<<"Runner Created. Elapsed time: "<<elapsed1<<"sec"<<endl;
 
-    cout << "Simulation starts" << endl;
+    cout<<"Simulation starts"<<endl;
 
     r.run_until(NDTime("04:00:00:000"));
     auto elapsed = std::chrono::duration_cast<std::chrono::duration
-        <double, std::ratio<1>>>(hclock::now() - start).count();
-    cout << "Simulation took:" << elapsed << "sec" << endl;
+        <double, std::ratio<1>>> (hclock::now() - start).count();
+    cout<<"Simulation took:"<<elapsed<<"sec"<<endl;
     return 0;
 }

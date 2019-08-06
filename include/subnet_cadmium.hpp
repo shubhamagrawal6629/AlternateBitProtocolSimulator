@@ -68,21 +68,20 @@ class Subnet {
 
         // external transition
         void external_transition(
-	    TIME e,
-	        typename make_message_bags<input_ports>::type mbs) { 
-            state.index ++;
-            if (get_messages<typename defs::in>(mbs).size() > 1)
-                assert(false && "One message at a time");                
+	    TIME e, typename make_message_bags<input_ports>::type mbs) { 
+            state.index++;
+            if (get_messages<typename defs::in>(mbs).size() > 1) {
+	        assert(false && "One message at a time");     
+            }				
             for (const auto &x : get_messages<typename defs::in>(mbs)) {
-                state.packet = static_cast < int > (x.value);
+                state.packet = static_cast <int> (x.value);
                 state.transmiting = true; 
             }               
         }
 
         // confluence transition
         void confluence_transition(
-	    TIME e,
-	        typename make_message_bags<input_ports>::type mbs) {
+	    TIME e, typename make_message_bags<input_ports>::type mbs) {
             internal_transition();
             external_transition(TIME(), std::move(mbs));
         }
@@ -105,7 +104,7 @@ class Subnet {
             TIME next_internal;
             if (state.transmiting) {
                 std::initializer_list<int>
-	            time = {0, 0, static_cast < int >
+	            time = {0, 0, static_cast <int>
 		        (round(distribution(generator)))};
                 // time is hour min and second
                 next_internal = TIME(time);
