@@ -107,7 +107,7 @@ int main() {
     /********************************************/
     string input_data_control =
         "../test/data/sender/sender_input_test_control_In.txt";
-    const char * i_input_data_control = input_data_control.c_str();
+    const char* i_input_data_control = input_data_control.c_str();
 
     std::shared_ptr<cadmium::dynamic::modeling::model>generator_con =
         cadmium::dynamic::translate::make_dynamic_atomic_model
@@ -116,7 +116,7 @@ int main() {
 
     string input_data_ack =
         "../test/data/sender/sender_input_test_ack_In.txt";
-    const char * i_input_data_ack = input_data_ack.c_str();
+    const char* i_input_data_ack = input_data_ack.c_str();
 
     std::shared_ptr<cadmium::dynamic::modeling::model> generator_ack =
         cadmium::dynamic::translate::make_dynamic_atomic_model
