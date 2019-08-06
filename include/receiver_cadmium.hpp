@@ -4,8 +4,8 @@
 *
 */
 
-#ifndef BOOST_SIMULATION_PDEVS_RECEIVER_HPP
-#define BOOST_SIMULATION_PDEVS_RECEIVER_HPP
+#ifndef _RECEIVER_CADMIUM_HPP_
+#define _RECEIVER_CADMIUM_HPP_
 
 #include <cadmium/modeling/ports.hpp>
 #include <cadmium/modeling/message_bag.hpp>
@@ -56,8 +56,8 @@ class Receiver {
         state_type state;
 		
         // ports definition
-        using input_ports=std::tuple<typename defs::in>;
-        using output_ports=std::tuple<typename defs::out>;
+        using input_ports = std::tuple<typename defs::in>;
+        using output_ports = std::tuple<typename defs::out>;
 
         // internal transition
         void internal_transition() {
@@ -111,4 +111,4 @@ class Receiver {
         }
 };     
   
-#endif // BOOST_SIMULATION_PDEVS_RECEIVER_HPP
+#endif // _RECEIVER_CADMIUM_HPP_

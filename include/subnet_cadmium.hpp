@@ -4,8 +4,8 @@
 *
 */
 
-#ifndef BOOST_SIMULATION_PDEVS_SUBNET_HPP
-#define BOOST_SIMULATION_PDEVS_SUBNET_HPP
+#ifndef _SUBNET_CADMIUM_HPP_
+#define _SUBNET_CADMIUM_HPP_
 
 #include <cadmium/modeling/ports.hpp>
 #include <cadmium/modeling/message_bag.hpp>
@@ -58,8 +58,8 @@ class Subnet {
         state_type state;
 		
         // ports definition
-        using input_ports=std::tuple<typename defs::in>;
-        using output_ports=std::tuple<typename defs::out>;
+        using input_ports = std::tuple<typename defs::in>;
+        using output_ports = std::tuple<typename defs::out>;
 
         // internal transition
         void internal_transition() {
@@ -122,4 +122,4 @@ class Subnet {
         }
 };    
 
-#endif // BOOST_SIMULATION_PDEVS_SUBNET_HPP
+#endif // _SUBNET_CADMIUM_HPP_

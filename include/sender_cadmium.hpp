@@ -3,8 +3,8 @@
 * ARSLab - Carleton University
 */
 
-#ifndef BOOST_SIMULATION_PDEVS_SENDER_HPP
-#define BOOST_SIMULATION_PDEVS_SENDER_HPP
+#ifndef _SENDER_CADMIUM_HPP_
+#define _SENDER_CADMIUM_HPP_
 
 #include <cadmium/modeling/ports.hpp>
 #include <cadmium/modeling/message_bag.hpp>
@@ -69,9 +69,9 @@ class Sender {
         state_type state;
             
 	// ports definition
-        using input_ports=std::tuple<typename defs::control_in,
+        using input_ports = std::tuple<typename defs::control_in,
             typename defs::ack_in>;
-        using output_ports=std::tuple<typename defs::packet_sent_out,
+        using output_ports = std::tuple<typename defs::packet_sent_out,
 	    typename defs::ack_received_out, typename defs::data_out>;
 		
         // internal transition
@@ -185,4 +185,4 @@ class Sender {
         }
 };     
 
-#endif // BOOST_SIMULATION_PDEVS_SENDER_HPP
+#endif // _SENDER_CADMIUM_HPP_
