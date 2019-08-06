@@ -167,7 +167,7 @@ class Sender {
             else if (state.ack) {
                 out.value = state.alt_bit;
                 get_messages<typename
-		defs::ack_received_out>(bags).push_back(out);
+		    defs::ack_received_out>(bags).push_back(out);
             }   
             return bags;
         }
