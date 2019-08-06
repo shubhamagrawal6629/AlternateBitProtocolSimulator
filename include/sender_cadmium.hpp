@@ -185,5 +185,4 @@ class Sender {
         }
 };     
 
-
 #endif // BOOST_SIMULATION_PDEVS_SENDER_HPP

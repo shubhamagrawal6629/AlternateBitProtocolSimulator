@@ -7,7 +7,6 @@
 #ifndef BOOST_SIMULATION_PDEVS_RECEIVER_HPP
 #define BOOST_SIMULATION_PDEVS_RECEIVER_HPP
 
-
 #include <cadmium/modeling/ports.hpp>
 #include <cadmium/modeling/message_bag.hpp>
 #include <limits>
@@ -90,7 +89,6 @@ class Receiver {
             Message_t out;              
             out.value = state.ack_num % 10;
             get_messages<typename defs::out>(bags).push_back(out);
-                
             return bags;
         }
 
@@ -113,5 +111,4 @@ class Receiver {
         }
 };     
   
-
 #endif // BOOST_SIMULATION_PDEVS_RECEIVER_HPP
