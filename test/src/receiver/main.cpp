@@ -103,7 +103,7 @@ int main() {
     /********************************************/
     string input_data_control =
         "../test/data/receiver/receiver_input_test.txt";
-    const char * i_input_data_control = input_data_control.c_str();
+    const char* i_input_data_control = input_data_control.c_str();
 
     std::shared_ptr<cadmium::dynamic::modeling::model>
         generator = cadmium::dynamic::translate::make_dynamic_atomic_model
@@ -141,8 +141,13 @@ int main() {
     };
     std::shared_ptr<cadmium::dynamic::modeling::coupled<TIME>> TOP =
         std::make_shared<cadmium::dynamic::modeling::coupled<TIME>>(
-            "TOP", submodels_TOP, iports_TOP,
-                oports_TOP, eics_TOP, eocs_TOP, ics_TOP);
+                                                                    "TOP", 
+                                                                    submodels_TOP, 
+                                                                    iports_TOP,
+                                                                    oports_TOP, 
+                                                                    eics_TOP, 
+                                                                    eocs_TOP, 
+                                                                    ics_TOP);
 
     ///****************////
 
