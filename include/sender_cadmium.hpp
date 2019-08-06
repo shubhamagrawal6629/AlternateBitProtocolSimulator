@@ -45,8 +45,8 @@ class Sender {
     using defs = sender_defs; // putting definitions in context
     public:
         //Parameters to be overwriten when instantiating the atomic model
-        TIME   PREPARATION_TIME;
-        TIME   TIMEOUT;
+        TIME PREPARATION_TIME;
+        TIME TIMEOUT;
         // default constructor
         Sender() noexcept {
             PREPARATION_TIME = TIME("00:00:10");
@@ -68,18 +68,17 @@ class Sender {
         }; 
         state_type state;
             
-	    // ports definition
+	// ports definition
         using input_ports=std::tuple<typename defs::control_in,
             typename defs::ack_in>;
         using output_ports=std::tuple<typename defs::packet_sent_out,
-	    typename defs::ack_received_out,
-	        typename defs::data_out>;
+	    typename defs::ack_received_out, typename defs::data_out>;
 		
         // internal transition
         void internal_transition() {
             if (state.ack) {
                 if (state.packet_num < state.total_packet_num) {
-                    state.packet_num ++;
+                    state.packet_num++;
                     state.ack = false;
                     state.alt_bit = (state.alt_bit + 1) % 2;
                     state.sending = true;
@@ -108,16 +107,15 @@ class Sender {
 
         // external transition
         void external_transition(
-	    TIME e,
-	        typename
-		    make_message_bags<input_ports>::type mbs) { 
+	    TIME e, typename make_message_bags<input_ports>::type mbs) { 
             if ((get_messages<typename defs::control_in>(mbs).size()
-	        +get_messages<typename defs::ack_in>(mbs).size()) > 1) 
+	        +get_messages<typename defs::ack_in>(mbs).size()) > 1) {
                 assert(false && "one message per time uniti");
+	    }
             for (const auto &x :
 	        get_messages<typename defs::control_in>(mbs)) {
                 if (state.model_active == false) {
-                    state.total_packet_num = static_cast < int > (x.value);
+                    state.total_packet_num = static_cast <int> (x.value);
                     if (state.total_packet_num > 0) {
                         state.packet_num = 1;
                         state.ack = false;
@@ -135,7 +133,7 @@ class Sender {
             }
             for (const auto &x : get_messages<typename defs::ack_in>(mbs)) {
                 if (state.model_active == true) { 
-                    if (state.alt_bit == static_cast < int > (x.value)) {
+                    if (state.alt_bit == static_cast <int> (x.value)) {
                         state.ack = true;
                         state.sending = false;
                         state.next_internal = TIME("00:00:00");
@@ -150,8 +148,7 @@ class Sender {
 
         // confluence transition
         void confluence_transition(
-            TIME e,
-                typename make_message_bags<input_ports>::type mbs) {
+            TIME e, typename make_message_bags<input_ports>::type mbs) {
             internal_transition();
             external_transition(TIME(), std::move(mbs));
         }
@@ -187,6 +184,5 @@ class Sender {
             return os;
         }
 };     
-
 
 #endif // BOOST_SIMULATION_PDEVS_SENDER_HPP

@@ -7,7 +7,6 @@
 #ifndef BOOST_SIMULATION_PDEVS_RECEIVER_HPP
 #define BOOST_SIMULATION_PDEVS_RECEIVER_HPP
 
-
 #include <cadmium/modeling/ports.hpp>
 #include <cadmium/modeling/message_bag.hpp>
 #include <limits>
@@ -41,7 +40,7 @@ class Receiver {
     using defs = receiver_defs; // putting definitions in context
     public:
         //Parameters to be overwriten when instantiating the atomic model
-        TIME   PREPARATION_TIME;
+        TIME PREPARATION_TIME;
         // default constructor
         Receiver() noexcept {
             PREPARATION_TIME  = TIME("00:00:10");
@@ -67,20 +66,19 @@ class Receiver {
 
         // external transition
         void external_transition(
-            TIME e,
-	        typename make_message_bags<input_ports>::type mbs) { 
-            if (get_messages<typename defs::in>(mbs).size() > 1)
+            TIME e, typename make_message_bags<input_ports>::type mbs) { 
+            if (get_messages<typename defs::in>(mbs).size() > 1) {
                 assert(false && "one message per time uniti");
+	    }
             for (const auto &x : get_messages<typename defs::in>(mbs)) {
-                state.ack_num = static_cast < int > (x.value);
+                state.ack_num = static_cast <int> (x.value);
                 state.sending = true;
             }  
         }
 
         // confluence transition
         void confluence_transition(
-	    TIME e,
-                typename make_message_bags<input_ports>::type mbs) {
+	    TIME e, typename make_message_bags<input_ports>::type mbs) {
             internal_transition();
             external_transition(TIME(), std::move(mbs));
         }
@@ -91,7 +89,6 @@ class Receiver {
             Message_t out;              
             out.value = state.ack_num % 10;
             get_messages<typename defs::out>(bags).push_back(out);
-                
             return bags;
         }
 
@@ -114,5 +111,4 @@ class Receiver {
         }
 };     
   
-
 #endif // BOOST_SIMULATION_PDEVS_RECEIVER_HPP
