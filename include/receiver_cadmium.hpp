@@ -71,7 +71,7 @@ class Receiver {
                 assert(false && "one message per time uniti");
 	    }
             for (const auto &x : get_messages<typename defs::in>(mbs)) {
-                state.ack_num = static_cast <int> (x.value);
+                state.ack_num = static_cast<int>(x.value);
                 state.sending = true;
             }  
         }

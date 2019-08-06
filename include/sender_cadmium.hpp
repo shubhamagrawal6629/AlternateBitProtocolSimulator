@@ -115,7 +115,7 @@ class Sender {
             for (const auto &x :
 	        get_messages<typename defs::control_in>(mbs)) {
                 if (state.model_active == false) {
-                    state.total_packet_num = static_cast <int> (x.value);
+                    state.total_packet_num = static_cast<int>(x.value);
                     if (state.total_packet_num > 0) {
                         state.packet_num = 1;
                         state.ack = false;
@@ -133,7 +133,7 @@ class Sender {
             }
             for (const auto &x : get_messages<typename defs::ack_in>(mbs)) {
                 if (state.model_active == true) { 
-                    if (state.alt_bit == static_cast <int> (x.value)) {
+                    if (state.alt_bit == static_cast<int>(x.value)) {
                         state.ack = true;
                         state.sending = false;
                         state.next_internal = TIME("00:00:00");
