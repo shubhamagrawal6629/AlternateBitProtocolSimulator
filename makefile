@@ -7,6 +7,7 @@ bin_folder := $(shell mkdir -p bin)
 INCLUDECADMIUM=-I lib/cadmium-master/include
 
 all: build/main.o build/main_r.o build/main_s.o build/main_n.o
+
 	$(CC) -g -o bin/ABP build/main.o build/message.o 
 	$(CC) -g -o bin/SENDER_TEST build/main_s.o build/message.o
 	$(CC) -g -o bin/SUBNET_TEST build/main_n.o build/message.o
