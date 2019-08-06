@@ -40,7 +40,7 @@ class Receiver {
     using defs = receiver_defs; // putting definitions in context
     public:
         //Parameters to be overwriten when instantiating the atomic model
-        TIME   PREPARATION_TIME;
+        TIME PREPARATION_TIME;
         // default constructor
         Receiver() noexcept {
             PREPARATION_TIME  = TIME("00:00:10");
