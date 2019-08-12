@@ -5,7 +5,7 @@
 #### Carleton University
 ### AUTHORS
 ---
-**Originally Developed by**: Cristina Ruiz Martin
+**Originally Developed by**: Cristina Ruiz Martin<br/>
 **Modified by**: Peter Bliznyuk-Kvitko and Shubham Agrawal
 ### INTRODUCTION
 ---
