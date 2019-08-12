@@ -69,7 +69,7 @@ Document alternatebitprot.pdf in the doc folder contains the explanation of this
 2.1. Run subnet test
 1. Open the terminal.
 2. To compile the test, type in the terminal:
->       		make clean; make comp; make all
+>               make clean; make comp; make all
 3. To run the test set the command prompt in the bin folder. To do so, type in the terminal the path to this folder.
 >               Example: cd bin
 4. Once inside the bin folder, type in the terminal **"./NAME_OF_THE_COMPILED_FILE"**. For this specific test you need to type:
@@ -82,7 +82,7 @@ Document alternatebitprot.pdf in the doc folder contains the explanation of this
 
 1. Open the terminal.
 2. To compile the project, type in the terminal:
->       		make clean; make comp; make all
+>               make clean; make comp; make all
 3. To run the simulation set the command prompt in the bin folder. To do so, type in the terminal the path to this folder.
 >               Example: cd bin
 4. Once inside Bin folder, type in the terminal **"./NAME_OF_THE_COMPILED_FILE NAME_OF_THE_INPUT_FILE"**. For this test you need to type:
