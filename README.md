@@ -92,7 +92,7 @@ Document alternatebitprot.pdf in the doc folder contains the explanation of this
     1. Create new .txt files with the same structure as input_abp_0.txt or input_abp_1.txt
 	2. Run the simulator using the instructions in step 4
 	3. If you want to keep the output, rename abp_output.txt. To do so, move to the data/output folder by typing **"cd ../data/output"** in the terminal and then type :
->          	            "mv abp_output.txt NEW_NAME"
->                   	 Example: mv abp_output.txt abp_output_0.txt
+>                       "mv abp_output.txt NEW_NAME"
+>                       Example: mv abp_output.txt abp_output_0.txt
 
 
