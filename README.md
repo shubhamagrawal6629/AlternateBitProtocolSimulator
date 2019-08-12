@@ -1,16 +1,30 @@
 # **ALTERNATE BIT PROTOCOL USING CADMIUM**
 ---
+### ORGANINIZATION
+---
+#### Carleton University
+### AUTHORS
+---
+**Originally Developed by**: Cristina Ruiz Martin
+**Modified by**: Peter Bliznyuk-Kvitko and Shubham Agrawal
 ### INTRODUCTION
 ---
-##### FILES ORGANIZATION
+ABP (Alternating Bit Protocol) is a communication protocol to ensure reliable transmission through unreliable network. In ABP protocol sender sends a packet and waits for an acknowledgement. If the acknowledgement doesn't arrive within a predefined time, the sender re-sends this packet until it receives an expected acknowledgement and then sends the next packet. In order to distinguish two consecutive packets, the sender adds an additional bit on each packet (called alternating bit because the sender uses 0 and 1 alternatively). 
+
+This software is a simulator to replicate the behavior of the Alternating Bit Protocol. The ABP simulator consists of 3 components.
+
+- **Receiver** - It receives the data and sends back acknowledgement after certain perios of time.
+- **Subnets** - It just transmits the packets to next node after a time delay. 
+- **Sender** - It sends the packet and then waits for acknowledgement from the receiver but if it does not receive the acknowledgement within time window it will resend the packet with alternating bit attached to it so that it can differentiate between the two packets. Once it receives the acknowledgement it will swnd the next packet until it has no more packets to send.
+### FILES ORGANIZATION
 ---
 ##### data [This folder contains the data files for the simulator]
 1. input
-		-input_abp_0.txt
-		-input_abp_1.txt
+    -   input_abp_0.txt
+    -    input_abp_1.txt
 2. output
-		-abp_output_0.txt
-		-abp_output_1.txt
+	-	-abp_output_0.txt
+	-	-abp_output_1.txt
 
 ##### doc [This folder contains the documentation for the project]
 1. alternatebitprot.pdf
@@ -27,8 +41,8 @@
 1. cadmium-master[This folder contains cadmium library files]
 2. DESTimes-master[This folder contains DesTimes library files]
 3. vendor[this folder contains third party vendor files]
-		-iestream.hpp
-		-nd_time.hpp
+	-	iestream.hpp
+	-	nd_time.hpp
 
 ##### src [This folder contains the source files written in c++ for the project]
 1. main.cpp
@@ -36,23 +50,27 @@
 
 ##### test [This folder the unit test for the different include files]
 1. data [This folder contains the data files for test folder]
-		1.1.receiver
-			-receiver_input_test.txt
-			-receiver_test_output.txt
-		1.2.sender
-			-sender_input_test_ack_In.txt
-			-sender_input_test_control_In.txt
-			-sender_test_output.txt
-		1.3.subnet
-			-subnet_input_test.txt
-			-subnet_test_output.txt
+	1.1.receiver
+	-	receiver_input_test.txt
+	-	receiver_test_output.txt
+    
+    1.2.sender
+	-	sender_input_test_ack_In.txt
+	-   sender_input_test_control_In.txt
+	-   sender_test_output.txt
+		
+    1.3.subnet
+	-   subnet_input_test.txt
+	-   subnet_test_output.txt
 2. src [This folder contains the source files written in c++ for test folder]
-		2.1.receiver
-			-main.cpp
-		2.2.sender
-			-main.cpp
-		2.3.subnet
-			-main.cpp
+	2.1.receiver
+    -   main.cpp
+
+    2.2.sender
+	-   main.cpp
+	
+	2.3.subnet
+	-   main.cpp
 
 ### STEPS TO RUN THE SIMULATOR
 ---
