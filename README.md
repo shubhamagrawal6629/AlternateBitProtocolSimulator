@@ -2,8 +2,7 @@
 ---
 ### ORGANINIZATION
 ---
-#### Carleton University
-\
+#### Carleton University\
 ### AUTHORS
 ---
 **Originally Developed by**: Cristina Ruiz Martin<br/>
