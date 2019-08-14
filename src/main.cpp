@@ -18,6 +18,7 @@
 #include "../lib/vendor/iestream.hpp"
 
 #include "../include/message.hpp"
+#include "../include/file_process.hpp"
 
 #include "../include/sender_cadmium.hpp"
 #include "../include/receiver_cadmium.hpp"
@@ -62,8 +63,11 @@ int main(int argc, char ** argv) {
 
   auto start = hclock::now(); //to measure simulation execution time
 
+  char out_file[] = "../data/output/abp_output.txt";
+  char proc_file[] = "../data/output/abp_proc.txt";
+  
 /*************** Loggers *******************/
-  static std::ofstream out_data("../data/output/abp_output.txt");
+  static std::ofstream out_data(out_file);
     struct oss_sink_provider{
         static std::ostream& sink(){          
             return out_data;
@@ -209,5 +213,8 @@ std::shared_ptr<cadmium::dynamic::modeling::coupled<TIME>> TOP = std::make_share
     r.run_until(NDTime("04:00:00:000"));
     auto elapsed = std::chrono::duration_cast<std::chrono::duration<double, std::ratio<1>>>(hclock::now() - start).count();
     cout << "Simulation took:" << elapsed << "sec" << endl;
+	
+    output_file_process(out_file, proc_file);
+	
     return 0;
 }
