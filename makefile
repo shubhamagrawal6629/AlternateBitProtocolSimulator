@@ -4,7 +4,7 @@ CFLAGS=-std=c++17
 build_folder := $(shell mkdir -p build)
 bin_folder := $(shell mkdir -p bin)
 
-INCLUDECADMIUM=-I lib/cadmium-master/include
+INCLUDECADMIUM=-I lib/cadmium/include
 
 all: build/main.o build/main_r.o build/main_s.o build/main_n.o build/file_process.o
 	$(CC) -g -o bin/ABP build/main.o build/message.o build/file_process.o
