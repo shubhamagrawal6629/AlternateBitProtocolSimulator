@@ -15,8 +15,8 @@
 * window, the sender will send the next packet. When
 * there are no more packets to send, the sender will
 * go again to the passive state. 
-*
-* Cristina Ruiz Martin
+*/
+/* Cristina Ruiz Martin
 * ARSLab - Carleton University
 *
 */

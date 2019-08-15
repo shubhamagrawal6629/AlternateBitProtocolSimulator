@@ -7,8 +7,8 @@
 * It is in passive phase initially. When it receives
 * a packet, it will go to active phase, send out
 * the acknowledgement and go to passive state again.
-*
-* Cristina Ruiz Martin
+*/
+/* Cristina Ruiz Martin
 * ARSLab - Carleton University
 *
 */

@@ -9,7 +9,8 @@
  * data and goes to passive state when no data
  * is being send or acknowledged
  *
- *
+ */
+ /*
  * Cristina Ruiz Martin
  * ARSLab - Carleton University
 */
@@ -57,7 +58,7 @@ class Subnet {
     // putting definitions in context
     using defs = subnet_defs;
     public:
-        /**Any Parameters to be overwritten
+        /*Any Parameters to be overwritten
          * when instantiating the atomic model.
         */
 
