@@ -7,6 +7,13 @@
 ---
 **Originally Developed by**: Cristina Ruiz Martin<br/>
 **Modified by**: Peter Bliznyuk-Kvitko and Shubham Agrawal
+
+### TABLE OF CONTENTS
+---
+- [INTRODUCTION](#Introduction)
+- [FILES ORGANIZATION](#File-Organization)
+- [STEPS TO RUN THE SIMULATOR](#Instructions)
+
 ### INTRODUCTION
 ---
 Alternating Bit Protocol(ABP) is a communication protocol to ensure reliable transmission through unreliable network. In ABP protocol sender sends a packet and waits for an acknowledgement. If the acknowledgement doesn't arrive within a predefined time, the sender re-sends this packet until it receives an expected acknowledgement and then sends the next packet. In order to distinguish two consecutive packets, the sender adds an additional bit on each packet (called alternating bit because the sender uses 0 and 1 alternatively).
