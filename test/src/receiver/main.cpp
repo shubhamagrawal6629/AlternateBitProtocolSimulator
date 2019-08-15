@@ -30,7 +30,6 @@
 #include "../../../lib/vendor/iestream.hpp"
 
 #include "../../../include/message.hpp"
-
 #include "../../../include/receiver_cadmium.hpp"
 
 using namespace std;
@@ -45,7 +44,7 @@ using TIME = NDTime;
 struct inp : public cadmium::in_port<Message_t> {};
 
 /**
- * Setting output ports or messages
+ * Setting output ports for messages
 */
 struct outp : public cadmium::out_port<Message_t> {};
 
@@ -53,7 +52,7 @@ struct outp : public cadmium::out_port<Message_t> {};
 /**
  * This is class for application generator that takes
  * the file path as parameter and waits for input
- * @tparam T  message
+ * @param T  message
  */
 template<typename T>
 class ApplicationGen : public iestream_input<Message_t,T> {
@@ -137,8 +136,8 @@ int main() {
 
 
     /**
-     * It gets the input file for thr receiver execution and
-     * runs the execution for number of times the have input
+     * It gets the input text file for execution of the simulation
+     * process for the receiver
      */
     string input_data_control =
         "../test/data/receiver/receiver_input_test.txt";
@@ -198,9 +197,8 @@ int main() {
 
     /**
      * In this model, runner are created and also the time to create
-     * them are measured. Once they are created simulation starts and
-     * the time it took to complete the simulation and simulation is ran until
-     * 04:00:00:000 time.
+     * them are measured. Once runners are created simulation starts and
+     * simulation runs until 04:00:00:000 time.
      */
 
     auto elapsed1 = std::chrono::duration_cast<std::chrono::duration
