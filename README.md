@@ -5,8 +5,8 @@
 #### Carleton University
 ### AUTHORS
 ---
-**Originally Developed by**: Cristina Ruiz Martin<br/>
-**Modified by**: Peter Bliznyuk-Kvitko and Shubham Agrawal
+**Originally Developed by**: Dr. [Cristina Ruiz Martin](https://github.com/cruizm)<br>
+**Modified by**: [Peter Bliznyuk-Kvitko](https://github.com/p-sky) and [Shubham Agrawal](https://github.com/shubhamagrawal6629)
 
 ### TABLE OF CONTENTS
 ---
