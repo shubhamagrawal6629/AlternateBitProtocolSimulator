@@ -13,8 +13,8 @@
 *
 */
 
-#ifndef _RECEIVER_CADMIUM_HPP_
-#define _RECEIVER_CADMIUM_HPP_
+#ifndef __RECEIVER_CADMIUM_HPP__
+#define __RECEIVER_CADMIUM_HPP__
 
 #include <cadmium/modeling/ports.hpp>
 #include <cadmium/modeling/message_bag.hpp>
