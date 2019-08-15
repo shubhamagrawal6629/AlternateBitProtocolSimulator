@@ -1,7 +1,7 @@
 /** \brief This header file implements the Receiver class.
 *
 * The receiver receives the message on input port
-* and sends acknowledge after fixed delay on output port.
+* and sends acknowledgement after fixed delay on output port.
 *
 * The receiver has two phases: passive and active.
 * It is in passive phase initially. When it receives
@@ -48,7 +48,7 @@ struct receiver_defs {
 };
 
 /** 
-* The Receiver class receives message and sends out acknowledge.
+* The Receiver class receives message and sends out acknowledgement.
 */
 template<typename TIME>
 class Receiver {
