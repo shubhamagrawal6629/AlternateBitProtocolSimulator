@@ -75,10 +75,10 @@ class Sender {
                                   /**< from output to acknowledge. */
                                   //!<Timeout constant.
         
-	/** 
-	* Constructor for Sender class.
-	* Initializes the delay constants and state structure.
-	*/
+        /** 
+        * Constructor for Sender class.
+        * Initializes the delay constants and state structure.
+        */
         Sender() noexcept {
             PREPARATION_TIME = TIME("00:00:10");
             TIMEOUT          = TIME("00:00:20");
@@ -88,8 +88,8 @@ class Sender {
         }
             
         /**
-	* Structure that holds the state variables.
-	*/
+        * Structure that holds the state variables.
+        */
         struct state_type {
             bool ack;              //!< Acknowledge bit: true - acknowledge.
             int packet_num;        //!< Packet Number to be sent.
@@ -101,16 +101,16 @@ class Sender {
         }; 
         state_type state;
             
-	/** ports definition */
+        /** ports definition */
         using input_ports = std::tuple<typename defs::control_in,
             typename defs::ack_in>;
         using output_ports = std::tuple<typename defs::packet_sent_out,
-	    typename defs::ack_received_out, typename defs::data_out>;
-		
-	/**
-	* Function that performs internal transition.
+        typename defs::ack_received_out, typename defs::data_out>;
+        
+        /**
+        * Function that performs internal transition.
         * It sets the next state based on the current state.
-	*/
+        */
         void internal_transition() {
             if (state.ack) {
                 if (state.packet_num < state.total_packet_num) {
@@ -124,7 +124,7 @@ class Sender {
                 else {
                     state.model_active = false;
                     state.next_internal = 
-	                std::numeric_limits<TIME>::infinity();
+                    std::numeric_limits<TIME>::infinity();
                 }
             }
             else {
@@ -142,35 +142,35 @@ class Sender {
         }
 
         /**
-	* Function that performs external transition.
+        * Function that performs external transition.
         * Retrieves the messages: if the number of messages
-	* is more than 1, it asserts that only one message is
+        * is more than 1, it asserts that only one message is
         * expected per time unit. After that it determines
         * and sets the next state based on the current state.
         * It also sets the time of next internal transition. 
         * @param e time variable
         * @param mbs message bags
-	*/
+        */
         void external_transition(TIME e,
             typename make_message_bags<input_ports>::type mbs) { 
             if ((get_messages<typename defs::control_in>(mbs).size()
-	        +get_messages<typename defs::ack_in>(mbs).size()) > 1) {
+                +get_messages<typename defs::ack_in>(mbs).size()) > 1) {
                 assert(false && "one message per time uniti");
-	    }
+            }
             for (const auto &x :
-	        get_messages<typename defs::control_in>(mbs)) {
+                get_messages<typename defs::control_in>(mbs)) {
                 if (state.model_active == false) {
                     state.total_packet_num = static_cast<int>(x.value);
                     if (state.total_packet_num > 0) {
                         state.packet_num = 1;
                         state.ack = false;
                         state.sending = true;
-			/** set initial alt_bit */
+                        /** set initial alt_bit */
                         state.alt_bit = state.packet_num % 2;
                         state.model_active = true;
                         state.next_internal = PREPARATION_TIME;
                     }
-		    else if (state.next_internal != 
+                    else if (state.next_internal != 
                         std::numeric_limits<TIME>::infinity()) {
                         state.next_internal = state.next_internal - e;
                     }
@@ -192,11 +192,11 @@ class Sender {
         }
 
         /** 
-	* Function that calls internal transition
-	* followed by external transition.
-	* @param e time variable
-	* @param mbs message bags
-	*/
+        * Function that calls internal transition
+        * followed by external transition.
+        * @param e time variable
+        * @param mbs message bags
+        */
         void confluence_transition(TIME e,
             typename make_message_bags<input_ports>::type mbs) {
             internal_transition();
@@ -204,16 +204,16 @@ class Sender {
         }
 
         /**
-	* Function that sends the packet to the output port.
-	* When in sending state, the packet is calculated as
+        * Function that sends the packet to the output port.
+        * When in sending state, the packet is calculated as
         * packet number multiplied by 10 + alternating bit
         * and assigned to output. The output is then pushed
         * to message bags.
         * When in acknowledge state, the alt_bit is 
         * assigned to output and the output is pushed
         * to message bags.
-	* @return Message bags
-	*/
+        * @return Message bags
+        */
         typename make_message_bags<output_ports>::type output() const {
             typename make_message_bags<output_ports>::type bags;
             Message_t out;
@@ -227,27 +227,27 @@ class Sender {
             else if (state.ack) {
                 out.value = state.alt_bit;
                 get_messages<typename
-		    defs::ack_received_out>(bags).push_back(out);
+                    defs::ack_received_out>(bags).push_back(out);
             }   
             return bags;
         }
 
         /**
-	* Function with no parameters that returns the next 
+        * Function with no parameters that returns the next 
         * internal transition time.
-	* @return Next internal time
-	*/
+        * @return Next internal time
+        */
         TIME time_advance() const {  
             return state.next_internal;
         }
 
         /**
-	* Function that outputs packet number and 
-	* total packet number to ostring stream.
-	* @param os the ostring stream
-	* @param i structure state_type
-	* @return os the ostring stream
-	*/
+        * Function that outputs packet number and 
+        * total packet number to ostring stream.
+        * @param os the ostring stream
+        * @param i structure state_type
+        * @return os the ostring stream
+        */
         friend std::ostringstream& operator<<(std::ostringstream& os,
             const typename Sender<TIME>::state_type& i) {
             os << "packetNum: " << i.packet_num << 
