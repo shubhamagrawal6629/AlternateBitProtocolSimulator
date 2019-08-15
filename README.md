@@ -1,6 +1,6 @@
 # **ALTERNATE BIT PROTOCOL USING CADMIUM**
 ---
-### ORGANINIZATION
+### ORGANIZATION
 ---
 #### Carleton University
 ### AUTHORS
@@ -9,7 +9,7 @@
 **Modified by**: Peter Bliznyuk-Kvitko and Shubham Agrawal
 ### INTRODUCTION
 ---
-ABP (Alternating Bit Protocol) is a communication protocol to ensure reliable transmission through unreliable network. In ABP protocol sender sends a packet and waits for an acknowledgement. If the acknowledgement doesn't arrive within a predefined time, the sender re-sends this packet until it receives an expected acknowledgement and then sends the next packet. In order to distinguish two consecutive packets, the sender adds an additional bit on each packet (called alternating bit because the sender uses 0 and 1 alternatively).
+Alternating Bit Protocol(ABP) is a communication protocol to ensure reliable transmission through unreliable network. In ABP protocol sender sends a packet and waits for an acknowledgement. If the acknowledgement doesn't arrive within a predefined time, the sender re-sends this packet until it receives an expected acknowledgement and then sends the next packet. In order to distinguish two consecutive packets, the sender adds an additional bit on each packet (called alternating bit because the sender uses 0 and 1 alternatively).
 
 This software is a simulator to replicate the behavior of the Alternating Bit Protocol. The ABP simulator consists of 3 components.
 
@@ -23,8 +23,8 @@ This software is a simulator to replicate the behavior of the Alternating Bit Pr
     -   input_abp_0.txt
     -    input_abp_1.txt
 2. output
-	-	-abp_output_0.txt
-	-	-abp_output_1.txt
+	-	abp_output_0.txt
+	-	abp_output_1.txt
 
 ##### doc [This folder contains the documentation for the project]
 1. alternatebitprot.pdf
