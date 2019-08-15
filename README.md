@@ -104,7 +104,7 @@ given in [document](https://github.com/shubhamagrawal6629/AlternateBitProtocolSi
 
 2.2. To run receiver and sender tests, the steps are analogous to 2.1
 
-3 - Run the simulator
+3.Run the simulator
 
 1. Open the terminal.
 2. To compile the project, type in the terminal:
