@@ -75,7 +75,10 @@ class Subnet {
                 
         /**
          * Structure that holds the
-         * state variables for transmitting
+         * state variables to check if it is in 
+	 * transmitting state using transmiting variable
+	 * and also which packet and what index value 
+	 * is going to be send
         */
         struct state_type {
             bool transmiting;
