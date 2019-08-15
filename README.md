@@ -77,7 +77,8 @@ This software is a simulator to replicate the behavior of the Alternating Bit Pr
 
 ### STEPS TO RUN THE SIMULATOR
 ---
-Document alternatebitprot.pdf in the doc folder contains the explanation of this simulator and steps to install the cadmium and destimes library are
+To refer working of Alternate Bit Protocol(ABP) in project look into alternatebitprot.pdf in the [document](https://github.com/shubhamagrawal6629/AlternateBitProtocolSimulator/tree/master/doc) folder.
+There are some third party libraries that needs to be installed to run the simulator and steps to install those libraries are
 given in [document](https://github.com/shubhamagrawal6629/AlternateBitProtocolSimulator/tree/master/doc) folder.
 
 1.Update include paths in all the makefiles in this folder and subfolders. You need to update the following lines:
@@ -97,7 +98,9 @@ given in [document](https://github.com/shubhamagrawal6629/AlternateBitProtocolSi
 >               Example: cd bin
 4. Once inside the bin folder, type in the terminal **"./NAME_OF_THE_COMPILED_FILE"**. For this specific test you need to type:
 >               ./SUBNET_TEST
-5. To check the output of the test, open  **"../test/data/subnet_test_output.txt"**
+5. For windows system type
+>               ./SUBNET_TEST.exe
+6. To check the output of the test, open  **"../test/data/subnet_test_output.txt"**
 
 2.2. To run receiver and sender tests, the steps are analogous to 2.1
 
@@ -110,8 +113,10 @@ given in [document](https://github.com/shubhamagrawal6629/AlternateBitProtocolSi
 >               Example: cd bin
 4. Once inside Bin folder, type in the terminal **"./NAME_OF_THE_COMPILED_FILE NAME_OF_THE_INPUT_FILE"**. For this test you need to type:
 >               ./ABP ../data/input/input_abp_1.txt
-5. To check the output of the simulation, open  **"../data/output/abp_output.txt"**
-6.  To execute the simulator with different inputs
+5. And for windows system type
+>               ./ABP.exe ../data/input/input_abp_1.txt
+6. To check the output of the simulation, open  **"../data/output/abp_output.txt"**
+7.  To execute the simulator with different inputs
     1. Create new .txt files with the same structure as input_abp_0.txt or input_abp_1.txt
 	2. Run the simulator using the instructions in step 4
 	3. If you want to keep the output, rename abp_output.txt. To do so, move to the data/output folder by typing **"cd ../data/output"** in the terminal and then type :
