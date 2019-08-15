@@ -58,10 +58,10 @@ class Subnet {
     // putting definitions in context
     using defs = subnet_defs;
     public:
-        /*Any Parameters to be overwritten
+        /*
+	 * Any Parameters to be overwritten
          * when instantiating the atomic model.
         */
-
 
         /**
          * Constructor for Subnet class.
