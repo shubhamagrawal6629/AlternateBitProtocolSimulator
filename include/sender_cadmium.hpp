@@ -21,8 +21,8 @@
 *
 */
 
-#ifndef _SENDER_CADMIUM_HPP_
-#define _SENDER_CADMIUM_HPP_
+#ifndef __SENDER_CADMIUM_HPP__
+#define __SENDER_CADMIUM_HPP__
 
 #include <cadmium/modeling/ports.hpp>
 #include <cadmium/modeling/message_bag.hpp>
