@@ -77,7 +77,7 @@ int main() {
     /**
      * Generating the log of all the operation and messages
      * that are being passed during the execution of this application
-     * and storing that in the file as stated in out_data.
+     * and storing that in the file as stated in out_data
      */
 
     static std::ofstream out_data(
@@ -152,7 +152,7 @@ int main() {
     std::shared_ptr<cadmium::dynamic::modeling::model>
         generator = cadmium::dynamic::translate::make_dynamic_atomic_model
             <ApplicationGen, TIME, const char*>
-                ("generator" , std::move(i_input_data_control));
+                ("generator", std::move(i_input_data_control));
 
     /**
      * This helps in identifying the output data is coming from receiver1
@@ -198,7 +198,7 @@ int main() {
     /**
      * In this model, runner are created and also the time to create
      * them are measured. Once runners are created simulation starts and
-     * simulation runs until 04:00:00:000 time.
+     * simulation runs until 04:00:00:000 time
      */
 
     auto elapsed1 = std::chrono::duration_cast<std::chrono::duration
