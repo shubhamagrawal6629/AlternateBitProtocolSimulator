@@ -57,7 +57,7 @@ class Receiver {
     public:
         TIME PREPARATION_TIME;   /**< Constant that holds the time delay */
                                  /**< from input to output. */
-                                 //!<Time delay constant.
+                                 /*!<Time delay constant.*/
         
         /** 
         * Constructor for Receiver class.
