@@ -13,6 +13,7 @@
 *
 */
 
+
 #ifndef __RECEIVER_CADMIUM_HPP__
 #define __RECEIVER_CADMIUM_HPP__
 
@@ -51,10 +52,12 @@ struct receiver_defs {
 */
 template<typename TIME>
 class Receiver {
-    // putting definitions in context
+    /** putting definitions in context */
     using defs = receiver_defs;
     public:
-        TIME PREPARATION_TIME;   /**< Constant that holds the time delay from input to output. */ //!<Time delay constant.
+        TIME PREPARATION_TIME;   /**< Constant that holds the time delay */
+                                 /**< from input to output. */
+                                 //!<Time delay constant.
 		
         /** 
 	* Constructor for Receiver class.
@@ -70,12 +73,16 @@ class Receiver {
 	* Structure that holds acknowledge number and receiver state.
 	*/
         struct state_type {
-            int ack_num;   /**< Alternating bit retrieved from the message and sent as acknowledge. */ //!< Acknowledge Number.
-            bool sending;  /**< State of the receiver: true - sending, false - passive. */ //!< State of the receiver.
+            int ack_num;   /**< Alternating bit retrieved from the message */
+                           /**< and sent as acknowledge. */
+                           //!< Acknowledge Number.
+            bool sending;  /**< State of the receiver: true - sending, */
+                           /**< false - passive. */
+                           //!< State of the receiver.
         }; 
         state_type state; 
 		
-        // ports definition
+        /** ports definition */
         using input_ports = std::tuple<typename defs::in>;
         using output_ports = std::tuple<typename defs::out>;
 
@@ -92,7 +99,7 @@ class Receiver {
 	* Retrieves the messages: if the number of messages
 	* is more than 1, it asserts that only one message is
         * expected per time unit. It then sets the acknowledge
-	* to the message value and state to sending.
+	* to the message value and sending state to true.
 	* @param e time variable
 	* @param mbs message bags
 	*/
@@ -134,7 +141,8 @@ class Receiver {
         }
 
         /**
-	* Function that sets the next internal transition time.
+	* Function with no parameters that sets
+        * the next internal transition time.
 	* If the current state is sending then the next internal 
 	* time is set to PREPARATION_TIME. Otherwise it is set
 	* to infinity.		
@@ -164,4 +172,4 @@ class Receiver {
         }
 };     
   
-#endif // _RECEIVER_CADMIUM_HPP_
+#endif /** _RECEIVER_CADMIUM_HPP_ */

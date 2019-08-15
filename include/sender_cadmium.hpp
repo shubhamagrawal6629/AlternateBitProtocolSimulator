@@ -65,11 +65,15 @@ struct sender_defs {
 */
 template<typename TIME>
 class Sender {
-    // putting definitions in context
+    /** putting definitions in context */
     using defs = sender_defs;
     public:
-        TIME PREPARATION_TIME;    /**< Constant that holds the time delay from acknowledge to output. */ //!<Time delay constant.
-        TIME TIMEOUT;             /**< Constant that holds the timeout delay from output to acknowledge. */ //!<Timeout constant.
+        TIME PREPARATION_TIME;    /**< Constant that holds the time delay */
+                                  /**< from acknowledge to output. */
+                                  //!<Time delay constant.
+        TIME TIMEOUT;             /**< Constant that holds the timeout delay */
+                                  /**< from output to acknowledge. */
+                                  //!<Timeout constant.
         
 	/** 
 	* Constructor for Sender class.
@@ -87,17 +91,17 @@ class Sender {
 	* Structure that holds the state variables.
 	*/
         struct state_type {
-            bool ack;
-            int packet_num;
-            int total_packet_num;
-            int alt_bit;
-            bool sending;
-            bool model_active;
-            TIME next_internal;
+            bool ack;              //!< Acknowledge bit: true - acknowledge.
+            int packet_num;        //!< Packet Number to be sent.
+            int total_packet_num;  //!< Total Packet Number.
+            int alt_bit;           //!< Alternating Bit.
+            bool sending;          //!< State: true - sending.
+            bool model_active;     //!< True - model is active.
+            TIME next_internal;    //!< Time of next internal transition.
         }; 
         state_type state;
             
-	// ports definition
+	/** ports definition */
         using input_ports = std::tuple<typename defs::control_in,
             typename defs::ack_in>;
         using output_ports = std::tuple<typename defs::packet_sent_out,
@@ -144,8 +148,8 @@ class Sender {
         * expected per time unit. After that it determines
         * and sets the next state based on the current state.
         * It also sets the time of next internal transition. 
-	* @param e time variable
-	* @param mbs message bags
+        * @param e time variable
+        * @param mbs message bags
 	*/
         void external_transition(TIME e,
             typename make_message_bags<input_ports>::type mbs) { 
@@ -161,7 +165,7 @@ class Sender {
                         state.packet_num = 1;
                         state.ack = false;
                         state.sending = true;
-			//set initial alt_bit
+			/** set initial alt_bit */
                         state.alt_bit = state.packet_num % 2;
                         state.model_active = true;
                         state.next_internal = PREPARATION_TIME;
@@ -229,7 +233,8 @@ class Sender {
         }
 
         /**
-	* Function that returns the next internal transition time.
+	* Function with no parameters that returns the next 
+        * internal transition time.
 	* @return Next internal time
 	*/
         TIME time_advance() const {  
@@ -251,4 +256,4 @@ class Sender {
         }
 };     
 
-#endif // _SENDER_CADMIUM_HPP_
+#endif /** _SENDER_CADMIUM_HPP_ */
