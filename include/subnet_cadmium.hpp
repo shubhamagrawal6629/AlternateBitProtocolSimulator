@@ -55,7 +55,7 @@ struct subnet_defs {
 */
 template<typename TIME>
 class Subnet {
-    // putting definitions in context
+    /*putting definitions in context*/
     using defs = subnet_defs;
     public:
         /*
