@@ -15,8 +15,8 @@
  * ARSLab - Carleton University
 */
 
-#ifndef _SUBNET_CADMIUM_HPP_
-#define _SUBNET_CADMIUM_HPP_
+#ifndef __SUBNET_CADMIUM_HPP__
+#define __SUBNET_CADMIUM_HPP__
 
 #include <cadmium/modeling/ports.hpp>
 #include <cadmium/modeling/message_bag.hpp>
