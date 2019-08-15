@@ -1,7 +1,7 @@
 /** \brief This header file implements the Sender class.
 *
 * The sender sends messages on the output port
-* and receives acknowledge on the input port.
+* and receives acknowledgement on the input port.
 *
 * The sender goes from initial passive phase
 * to active when an external signal is received.
