@@ -68,7 +68,7 @@ void write_file(char *fout, char *file) {
     char* time;
 	
     if (out_file.is_open()) {
-        out_file << "Time           value  port                component\n";
+        out_file << "Time\t\t\tvalue\tport\t\t\t\t\tcomponent\n";
 
         // split the file string on new line
         pch = strtok(file, "\r\n");
@@ -104,7 +104,7 @@ void write_file(char *fout, char *file) {
 		    
                     // if value is not empty, output to file in specified format			
                     if (strcmp(&value[0], "") != 0) {
-                        out_file << setw(15) << left << time << setw(7) << value << setw(20) << port << setw(15) << comp << "\n";
+                        out_file << setw(15) << left << time << "\t"<<setw(7) << value<<"\t" << setw(20) << port<<"\t" << setw(15) << comp << "\n";
                     }
                 }
             }

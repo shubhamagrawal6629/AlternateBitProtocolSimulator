@@ -82,7 +82,7 @@ class Sender {
         */
         Sender() noexcept {
             PREPARATION_TIME = TIME("00:00:10");
-            TIMEOUT          = TIME("00:00:20");
+            TIMEOUT          = TIME("00:10:00");
             state.alt_bit    = 0;
             state.next_internal    = std::numeric_limits<TIME>::infinity();
             state.model_active     = false;
