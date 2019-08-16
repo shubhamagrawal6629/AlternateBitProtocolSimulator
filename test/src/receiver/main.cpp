@@ -36,6 +36,7 @@
 
 #define RECEIVER_OUTPUTFILE_PATH "../test/data/receiver/receiver_test_output.txt"
 #define RECEIVER_INPUTFILE_PATH "../test/data/receiver/receiver_input_test.txt"
+#define RECEIVER_MODIFIED_PATH "../test/data/receiver/receiver_test_proc.txt"
 using namespace std;
 
 using hclock = chrono::high_resolution_clock;
@@ -77,8 +78,8 @@ class ApplicationGen : public iestream_input<Message_t,T> {
 int main() {
 
     auto start = hclock::now(); //to measure simulation execution time
-    char out_file[] = "../test/data/receiver/receiver_test_output.txt";
-    char proc_file[] = "../test/data/receiver/receiver_test_proc.txt";
+    char out_file[] = RECEIVER_OUTPUTFILE_PATH;
+    char proc_file[] = RECEIVER_MODIFIED_PATH;
 
     /*************** Loggers *******************/
     static std::ofstream out_data(
