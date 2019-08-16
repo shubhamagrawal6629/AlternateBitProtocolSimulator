@@ -89,15 +89,23 @@ To refer working of Alternate Bit Protocol(ABP) in project look into alternatebi
 There are some third party libraries that needs to be installed to run the simulator and steps to install those libraries are
 given in [document](https://github.com/shubhamagrawal6629/AlternateBitProtocolSimulator/tree/master/doc) folder.
 
-1.Update include paths in all the makefiles in this folder and subfolders. You need to update the following lines:
+**1. To download the submodule files to use those libraries perform the following steps**
+1. Clone the github repository using terminal or cmd using following command
+>               git clone <link to repository>
+2. If the repository is not the one that contains the submodules then make a pull request to that repository using
+>               git pull origin [repository-name]
+3. Once in the repository with submodules type in 
+>               git submodule update --init --recursive
 
-1. INCLUDECADMIUM=-I lib/cadmium-master/include
+**2. Update include paths in all the makefiles in this folder and subfolders. You need to update the following lines:**
+
+1. INCLUDECADMIUM=-I lib/cadmium/include
 2. Update the relative path to cadmium/include from the folder where the makefile is. You need to take into account where you copied the folder during the installation process
->               Example: INCLUDECADMIUM=-I lib/cadmium-master/include
+>               Example: INCLUDECADMIUM=-I lib/cadmium/include
 
-2.Run the unit tests
+**3. Run the unit tests**
 
-2.1. Run subnet test
+3.1. Run subnet test
 
 1. Open the terminal.
 2. To compile the test, type in the terminal:
@@ -109,10 +117,11 @@ given in [document](https://github.com/shubhamagrawal6629/AlternateBitProtocolSi
 5. For windows system type
 >               ./SUBNET_TEST.exe
 6. To check the output of the test, open  **"../test/data/subnet_test_output.txt"**
+7. To check the modified ouput that is more understandable, open **"../test/data/subnet_test_proc.txt"**
 
-2.2. To run receiver and sender tests, the steps are analogous to 2.1
+3.2. To run receiver and sender tests, the steps are analogous to 2.1
 
-3.Run the simulator
+**4. Run the simulator**
 
 1. Open the terminal.
 2. To compile the project, type in the terminal:
@@ -124,7 +133,8 @@ given in [document](https://github.com/shubhamagrawal6629/AlternateBitProtocolSi
 5. And for windows system type
 >               ./ABP.exe ../data/input/input_abp_1.txt
 6. To check the output of the simulation, open  **"../data/output/abp_output.txt"**
-7.  To execute the simulator with different inputs
+7. To check the modified ouput that is more understandable, open  **"../data/output/abp_proc.txt"**
+8.  To execute the simulator with different inputs
     1. Create new .txt files with the same structure as input_abp_0.txt or input_abp_1.txt
 	2. Run the simulator using the instructions in step 4
 	3. If you want to keep the output, rename abp_output.txt. To do so, move to the data/output folder by typing **"cd ../data/output"** in the terminal and then type :
