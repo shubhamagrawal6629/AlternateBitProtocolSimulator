@@ -32,6 +32,8 @@
 #include "../../../include/message.hpp"
 #include "../../../include/receiver_cadmium.hpp"
 
+#define RECEIVER_OUTPUTFILE_PATH "../test/data/receiver/receiver_test_output.txt"
+#define RECEIVER_INPUTFILE_PATH "../test/data/receiver/receiver_input_test.txt"
 using namespace std;
 
 using hclock = chrono::high_resolution_clock;
@@ -80,9 +82,7 @@ int main() {
      * and storing that in the file as stated in out_data
      */
 
-    static std::ofstream out_data(
-        "../test/data/receiver/receiver_test_output.txt");
-
+    static std::ofstream out_data(RECEIVER_OUTPUTFILE_PATH);
 
     /**
      * This structure calls the ostream that is the output stream
@@ -139,8 +139,7 @@ int main() {
      * It gets the input text file for execution of the simulation
      * process for the receiver
      */
-    string input_data_control =
-        "../test/data/receiver/receiver_input_test.txt";
+    string input_data_control = RECEIVER_INPUTFILE_PATH;
     const char* i_input_data_control = input_data_control.c_str();
 
 
