@@ -24,7 +24,7 @@
 #include "../include/receiver_cadmium.hpp"
 #include "../include/subnet_cadmium.hpp"
 
-
+#define ABP_OUTPUTFILE_PATH "../data/output/abp_output.txt"
 using namespace std;
 
 using hclock=chrono::high_resolution_clock;
@@ -68,6 +68,7 @@ int main(int argc, char ** argv) {
   
 /*************** Loggers *******************/
   static std::ofstream out_data(out_file);
+  
     struct oss_sink_provider{
         static std::ostream& sink(){          
             return out_data;

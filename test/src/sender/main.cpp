@@ -22,6 +22,8 @@
 
 #include "../../../include/sender_cadmium.hpp"
 
+#define SENDER_OUTPUTFILE_PATH "../test/data/sender/sender_test_output.txt"
+#define SENDER_INPUTFILE_PATH "../test/data/sender/sender_input_test_control_In.txt"
 using namespace std;
 
 using hclock = chrono::high_resolution_clock;
@@ -60,6 +62,7 @@ int main() {
     /*************** Loggers *******************/
     static std::ofstream out_data(
         out_file);
+
     struct oss_sink_provider {
         static std::ostream& sink() {
             return out_data;
@@ -108,8 +111,7 @@ int main() {
     /********************************************/
     /****** APPLICATION GENERATOR *******************/
     /********************************************/
-    string input_data_control =
-        "../test/data/sender/sender_input_test_control_In.txt";
+    string input_data_control = SENDER_INPUTFILE_PATH;
     const char* i_input_data_control = input_data_control.c_str();
 
     std::shared_ptr<cadmium::dynamic::modeling::model>generator_con =

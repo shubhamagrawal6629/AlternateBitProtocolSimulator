@@ -1,20 +1,22 @@
 /** \brief This header file implements the Receiver class.
 *
 * The receiver receives the message on input port
-* and sends acknowledge after fixed delay on output port.
+* and sends acknowledgement after fixed delay on output port.
 *
 * The receiver has two phases: passive and active.
 * It is in passive phase initially. When it receives
 * a packet, it will go to active phase, send out
 * the acknowledgement and go to passive state again.
-*
+*/
+/* 
 * Cristina Ruiz Martin
 * ARSLab - Carleton University
 *
 */
 
-#ifndef _RECEIVER_CADMIUM_HPP_
-#define _RECEIVER_CADMIUM_HPP_
+
+#ifndef __RECEIVER_CADMIUM_HPP__
+#define __RECEIVER_CADMIUM_HPP__
 
 #include <cadmium/modeling/ports.hpp>
 #include <cadmium/modeling/message_bag.hpp>
@@ -47,19 +49,21 @@ struct receiver_defs {
 };
 
 /** 
-* The Receiver class receives message and sends out acknowledge.
+* The Receiver class receives message and sends out acknowledgement.
 */
 template<typename TIME>
 class Receiver {
-    // putting definitions in context
+    /** putting definitions in context */
     using defs = receiver_defs;
     public:
-        TIME PREPARATION_TIME;   /**< Constant that holds the time delay from input to output. */ //!<Time delay constant.
-		
+        TIME PREPARATION_TIME;   /**< Constant that holds the time delay */
+                                 /**< from input to output. */
+                                 /*!<Time delay constant.*/
+        
         /** 
-	* Constructor for Receiver class.
-	* Initializes the delay constant and state structure.
-	*/
+        * Constructor for Receiver class.
+        * Initializes the delay constant and state structure.
+        */
         Receiver() noexcept {
             PREPARATION_TIME  = TIME("00:00:10");
             state.ack_num     = 0;
@@ -67,40 +71,44 @@ class Receiver {
         }
             
         /**
-	* Structure that holds acknowledge number and receiver state.
-	*/
+        * Structure that holds acknowledge number and receiver state.
+        */
         struct state_type {
-            int ack_num;   /**< Alternating bit retrieved from the message and sent as acknowledge. */ //!< Acknowledge Number.
-            bool sending;  /**< State of the receiver: true - sending, false - passive. */ //!< State of the receiver.
+            int ack_num;   /**< Alternating bit retrieved from the message */
+                           /**< and sent as acknowledge. */
+                           //!< Acknowledge Number.
+            bool sending;  /**< State of the receiver: true - sending, */
+                           /**< false - passive. */
+                           //!< State of the receiver.
         }; 
         state_type state; 
-		
-        // ports definition
+        
+        /** ports definition */
         using input_ports = std::tuple<typename defs::in>;
         using output_ports = std::tuple<typename defs::out>;
 
         /**
-	* Function that performs the internal transition.
+        * Function that performs the internal transition.
         * It turns off the receiver sending state.
-	*/
+        */
         void internal_transition() {
             state.sending = false; 
         }
 
         /**
-	* Function that performs external transition.
-	* Retrieves the messages: if the number of messages
-	* is more than 1, it asserts that only one message is
+        * Function that performs external transition.
+        * Retrieves the messages: if the number of messages
+        * is more than 1, it asserts that only one message is
         * expected per time unit. It then sets the acknowledge
-	* to the message value and state to sending.
-	* @param e time variable
-	* @param mbs message bags
-	*/
+        * to the message value and sending state to true.
+        * @param e time variable
+        * @param mbs message bags
+        */
         void external_transition(TIME e,
             typename make_message_bags<input_ports>::type mbs) { 
             if (get_messages<typename defs::in>(mbs).size() > 1) {
                 assert(false && "one message per time uniti");
-	    }
+            }
             for (const auto &x : get_messages<typename defs::in>(mbs)) {
                 state.ack_num = static_cast<int>(x.value);
                 state.sending = true;
@@ -108,11 +116,11 @@ class Receiver {
         }
 
         /** 
-	* Function that calls internal transition
-	* followed by external transition.
-	* @param e the first argument
-	* @param mbs the second argument
-	*/
+        * Function that calls internal transition
+        * followed by external transition.
+        * @param e the first argument
+        * @param mbs the second argument
+        */
         void confluence_transition(TIME e,
             typename make_message_bags<input_ports>::type mbs) {
             internal_transition();
@@ -120,11 +128,11 @@ class Receiver {
         }
 
         /**
-	* Function that sends the acknowledge to the output port.
-	* The acknowledge is calculated as remainder of message value
-	* divided by 10. 
-	* @return Message bags
-	*/
+        * Function that sends the acknowledge to the output port.
+        * The acknowledge is calculated as remainder of message value
+        * divided by 10. 
+        * @return Message bags
+        */
         typename make_message_bags<output_ports>::type output() const {
             typename make_message_bags<output_ports>::type bags;
             Message_t out;
@@ -134,12 +142,13 @@ class Receiver {
         }
 
         /**
-	* Function that sets the next internal transition time.
-	* If the current state is sending then the next internal 
-	* time is set to PREPARATION_TIME. Otherwise it is set
-	* to infinity.		
-	* @return Next internal time
-	*/
+        * Function with no parameters that sets
+        * the next internal transition time.
+        * If the current state is sending then the next internal 
+        * time is set to PREPARATION_TIME. Otherwise it is set
+        * to infinity.        
+        * @return Next internal time
+        */
         TIME time_advance() const {  
             TIME next_internal;
             if (state.sending) {
@@ -151,12 +160,12 @@ class Receiver {
             return next_internal;
         }
 
-	/**
-	* Function that outputs acknowledge number to ostring stream.
-	* @param os the ostring stream
-	* @param i structure state_type
-	* @return os the ostring stream
-	*/
+        /**
+        * Function that outputs acknowledge number to ostring stream.
+        * @param os the ostring stream
+        * @param i structure state_type
+        * @return os the ostring stream
+        */
         friend std::ostringstream& operator<<(std::ostringstream& os, 
             const typename Receiver<TIME>::state_type& i) {
             os << "ack_num: " << i.ack_num; 
@@ -164,4 +173,4 @@ class Receiver {
         }
 };     
   
-#endif // _RECEIVER_CADMIUM_HPP_
+#endif /** _RECEIVER_CADMIUM_HPP_ */
