@@ -1,11 +1,21 @@
-/**
-* Cristina Ruiz Martin
+/** \brief This header file implements the Receiver class.
+*
+* The receiver receives the message on input port
+* and sends acknowledgement after fixed delay on output port.
+*
+* The receiver has two phases: passive and active.
+* It is in passive phase initially. When it receives
+* a packet, it will go to active phase, send out
+* the acknowledgement and go to passive state again.
+*/
+/* Cristina Ruiz Martin
 * ARSLab - Carleton University
 *
 */
 
-#ifndef _RECEIVER_CADMIUM_HPP_
-#define _RECEIVER_CADMIUM_HPP_
+
+#ifndef __RECEIVER_CADMIUM_HPP__
+#define __RECEIVER_CADMIUM_HPP__
 
 #include <cadmium/modeling/ports.hpp>
 #include <cadmium/modeling/message_bag.hpp>
@@ -27,72 +37,117 @@
 using namespace cadmium;
 using namespace std;
 
-//Port definition
+/** 
+* Structure that holds input and output messages.
+*/
 struct receiver_defs {
     struct out : public out_port<Message_t> {
     };
     struct in : public in_port<Message_t> {
     };
 };
-   
+
+/** 
+* The Receiver class receives message and sends out acknowledgement.
+*/
 template<typename TIME>
 class Receiver {
-    using defs = receiver_defs; // putting definitions in context
+    /** putting definitions in context */
+    using defs = receiver_defs;
     public:
-        //Parameters to be overwriten when instantiating the atomic model
-        TIME PREPARATION_TIME;
-        // default constructor
+        TIME PREPARATION_TIME;   /**< Constant that holds the time delay */
+                                 /**< from input to output. */
+                                 /*!<Time delay constant.*/
+        
+        /** 
+        * Constructor for Receiver class.
+        * Initializes the delay constant and state structure.
+        */
         Receiver() noexcept {
             PREPARATION_TIME  = TIME("00:00:10");
             state.ack_num     = 0;
             state.sending     = false;
         }
             
-        // state definition
+        /**
+        * Structure that holds acknowledge number and receiver state.
+        */
         struct state_type {
-            int ack_num;
-            bool sending;
+            int ack_num;   /**< Alternating bit retrieved from the message */
+                           /**< and sent as acknowledge. */
+                           //!< Acknowledge Number.
+            bool sending;  /**< State of the receiver: true - sending, */
+                           /**< false - passive. */
+                           //!< State of the receiver.
         }; 
-        state_type state;
-		
-        // ports definition
+        state_type state; 
+        
+        /** ports definition */
         using input_ports = std::tuple<typename defs::in>;
         using output_ports = std::tuple<typename defs::out>;
 
-        // internal transition
+        /**
+        * Function that performs the internal transition.
+        * It turns off the receiver sending state.
+        */
         void internal_transition() {
             state.sending = false; 
         }
 
-        // external transition
+        /**
+        * Function that performs external transition.
+        * Retrieves the messages: if the number of messages
+        * is more than 1, it asserts that only one message is
+        * expected per time unit. It then sets the acknowledge
+        * to the message value and sending state to true.
+        * @param e time variable
+        * @param mbs message bags
+        */
         void external_transition(TIME e,
             typename make_message_bags<input_ports>::type mbs) { 
             if (get_messages<typename defs::in>(mbs).size() > 1) {
                 assert(false && "one message per time uniti");
-	    }
+            }
             for (const auto &x : get_messages<typename defs::in>(mbs)) {
                 state.ack_num = static_cast<int>(x.value);
                 state.sending = true;
             }  
         }
 
-        // confluence transition
+        /** 
+        * Function that calls internal transition
+        * followed by external transition.
+        * @param e the first argument
+        * @param mbs the second argument
+        */
         void confluence_transition(TIME e,
             typename make_message_bags<input_ports>::type mbs) {
             internal_transition();
             external_transition(TIME(), std::move(mbs));
         }
 
-        // output function
+        /**
+        * Function that sends the acknowledge to the output port.
+        * The acknowledge is calculated as remainder of message value
+        * divided by 10. 
+        * @return Message bags
+        */
         typename make_message_bags<output_ports>::type output() const {
             typename make_message_bags<output_ports>::type bags;
-            Message_t out;              
-            out.value = state.ack_num % 10;
+            Message_t out;
+            out.value = state.ack_num % 10;  
             get_messages<typename defs::out>(bags).push_back(out);
             return bags;
         }
 
-        // time_advance function
+        /**
+        * Function with no parameters that sets
+        * the next internal transition time.
+        * If the current state is sending then the next internal 
+        * time is set to PREPARATION_TIME. Otherwise it is set
+        * to infinity.        
+        * @return Next internal time
+        */
         TIME time_advance() const {  
             TIME next_internal;
             if (state.sending) {
@@ -104,6 +159,12 @@ class Receiver {
             return next_internal;
         }
 
+        /**
+        * Function that outputs acknowledge number to ostring stream.
+        * @param os the ostring stream
+        * @param i structure state_type
+        * @return os the ostring stream
+        */
         friend std::ostringstream& operator<<(std::ostringstream& os, 
             const typename Receiver<TIME>::state_type& i) {
             os << "ack_num: " << i.ack_num; 
@@ -111,4 +172,4 @@ class Receiver {
         }
 };     
   
-#endif // _RECEIVER_CADMIUM_HPP_
+#endif /** _RECEIVER_CADMIUM_HPP_ */

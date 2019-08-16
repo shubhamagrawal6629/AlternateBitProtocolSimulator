@@ -23,7 +23,7 @@
 #include "../include/receiver_cadmium.hpp"
 #include "../include/subnet_cadmium.hpp"
 
-
+#define ABP_OUTPUTFILE_PATH "../data/output/abp_output.txt"
 using namespace std;
 
 using hclock=chrono::high_resolution_clock;
@@ -63,7 +63,7 @@ int main(int argc, char ** argv) {
   auto start = hclock::now(); //to measure simulation execution time
 
 /*************** Loggers *******************/
-  static std::ofstream out_data("../data/output/abp_output.txt");
+  static std::ofstream out_data(ABP_OUTPUTFILE_PATH);
     struct oss_sink_provider{
         static std::ostream& sink(){          
             return out_data;

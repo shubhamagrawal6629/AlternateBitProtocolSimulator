@@ -1,4 +1,4 @@
-# This file is used to ignore files that are not needed to be uploaded to git ot github
+# This file is used to ignore files that are not needed to be uploaded to git or github
 
 build/*.o
 bin/*.exe
