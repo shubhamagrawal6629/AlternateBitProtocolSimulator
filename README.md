@@ -31,30 +31,37 @@ This software is a simulator to replicate the behavior of the Alternating Bit Pr
     -   input_abp_0.txt
     -    input_abp_1.txt
 2. output
+	-	abp_output.txt
 	-	abp_output_0.txt
 	-	abp_output_1.txt
+	-	abp_proc.txt
 
 ##### doc [This folder contains the documentation for the project]
 1. alternatebitprot.pdf
 2. Cadmium_Documentation_Ubuntu.pdf
 3. Cadmium_Windows.pdf
+4. Doxygen_files.zip
+5. Doxygen_files_receiver.zip
+6. doxygen_html_cadmium_headers.zip
+7. doxygen_html_receiver_sender.zip
 
 ##### include[This folder contains the header files]
-1. message.hpp
-2. receiver_cadmium.hpp
-3. sender_cadmium.hpp
-4. subnet_cadmium.hpp
+1. file_process.hpp
+2. message.hpp
+3. receiver_cadmium.hpp
+4. sender_cadmium.hpp
+5. subnet_cadmium.hpp
 
 ##### lib [This folder contains 3rd party libraries needed in the project]
-1. cadmium-master[This folder contains cadmium library files]
-2. DESTimes-master[This folder contains DesTimes library files]
-3. vendor[this folder contains third party vendor files]
-	-	iestream.hpp
-	-	nd_time.hpp
+1. cadmium[This folder contains cadmium library files as submodules] 
+2. DESTimes[This folder contains DesTimes library files as submodules]
+3. iestream.hpp
+
 
 ##### src [This folder contains the source files written in c++ for the project]
-1. main.cpp
-2. message.cpp
+1. file_process.cpp
+2. main.cpp
+3. message.cpp
 
 ##### test [This folder the unit test for the different include files]
 1. data [This folder contains the data files for test folder]
@@ -62,15 +69,18 @@ This software is a simulator to replicate the behavior of the Alternating Bit Pr
    1.1.receiver
     -    receiver_input_test.txt
 	-	receiver_test_output.txt
+	- 	receiver_test_proc.txt
 
     1.2.sender
 	-	sender_input_test_ack_In.txt
 	-   sender_input_test_control_In.txt
 	-   sender_test_output.txt
+	-   sender_test_proc.txt
 
     1.3.subnet
 	-   subnet_input_test.txt
 	-   subnet_test_output.txt
+	-   subnet_test_proc.txt
 2. src [This folder contains the source files written in c++ for test folder]
 
     2.1.receiver
