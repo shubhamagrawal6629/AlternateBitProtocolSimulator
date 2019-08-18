@@ -89,7 +89,7 @@ void write_file(char *fout, char *file) {
     char* time;
     
     if (out_file.is_open()) {
-        out_file << "Time           Value  Port                Component\n";
+        out_file << "Time\t\t\tValue\tPort\t\t\t\t\tComponent\n";
 
         /** split the file string on new line */
         pch = strtok(file, "\r\n");

@@ -47,4 +47,3 @@ void write_file(char *fout, char *file);
 
 
 #endif // __FILE_PROCESS_HPP__
-
