@@ -18,12 +18,12 @@
 #include "../../../lib/iestream.hpp"
 
 #include "../../../include/message.hpp"
-#include "../../../include/file_process.hpp"
 
+#include "../../../include/file_process.hpp"
 #include "../../../include/sender_cadmium.hpp"
 
 #define SENDER_OUTPUTFILE_PATH "../test/data/sender/sender_test_output.txt"
-#define SENDER_INPUTFILE_PATH "../test/data/sender/sender_input_test_ack_In.txt"
+#define SENDER_INPUTFILE_PATH "../test/data/sender/sender_input_test.txt"
 #define SENDER_MODIFIED_PATH "../test/data/sender/sender_test_proc.txt"
 using namespace std;
 
@@ -63,7 +63,6 @@ int main() {
     /*************** Loggers *******************/
     static std::ofstream out_data(
         out_file);
-
     struct oss_sink_provider {
         static std::ostream& sink() {
             return out_data;
@@ -120,7 +119,8 @@ int main() {
             <ApplicationGen, TIME, const char*>(
                 "generator_con" , std::move(i_input_data_control));
 
-    string input_data_ack = SENDER_INPUTFILE_PATH;
+    string input_data_ack =
+        "../test/data/sender/sender_input_test_ack_In.txt";
     const char* i_input_data_ack = input_data_ack.c_str();
 
     std::shared_ptr<cadmium::dynamic::modeling::model> generator_ack =

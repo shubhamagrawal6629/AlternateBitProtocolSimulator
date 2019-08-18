@@ -1,7 +1,7 @@
 /** \brief This header file implements the Sender class.
 *
 * The sender sends messages on the output port
-* and receives acknowledgement on the input port.
+* and receives acknowledge on the input port.
 *
 * The sender goes from initial passive phase
 * to active when an external signal is received.
@@ -16,8 +16,7 @@
 * there are no more packets to send, the sender will
 * go again to the passive state. 
 */
-/* 
-* Cristina Ruiz Martin
+/* Cristina Ruiz Martin
 * ARSLab - Carleton University
 *
 */
@@ -71,10 +70,10 @@ class Sender {
     public:
         TIME PREPARATION_TIME;    /**< Constant that holds the time delay */
                                   /**< from acknowledge to output. */
-                                  /*!<Time delay constant.*/
+                                  //!<Time delay constant.
         TIME TIMEOUT;             /**< Constant that holds the timeout delay */
                                   /**< from output to acknowledge. */
-                                  /*!<Timeout constant.*/
+                                  //!<Timeout constant.
         
         /** 
         * Constructor for Sender class.
@@ -92,13 +91,13 @@ class Sender {
         * Structure that holds the state variables.
         */
         struct state_type {
-            bool ack;              /*!< Acknowledge bit: true - acknowledge.*/
-            int packet_num;        /*!< Packet Number to be sent.*/
-            int total_packet_num;  /*!< Total Packet Number.*/
-            int alt_bit;           /*!< Alternating Bit.*/
-            bool sending;          /*!< State: true - sending.*/
-            bool model_active;     /*!< True - model is active.*/
-            TIME next_internal;    /*!< Time of next internal transition.*/
+            bool ack;              //!< Acknowledge bit: true - acknowledge.
+            int packet_num;        //!< Packet Number to be sent.
+            int total_packet_num;  //!< Total Packet Number.
+            int alt_bit;           //!< Alternating Bit.
+            bool sending;          //!< State: true - sending.
+            bool model_active;     //!< True - model is active.
+            TIME next_internal;    //!< Time of next internal transition.
         }; 
         state_type state;
             

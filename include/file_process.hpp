@@ -17,8 +17,8 @@
 *
 */
 
-#ifndef _FILE_PROCESS_HPP_
-#define _FILE_PROCESS_HPP_
+#ifndef __FILE_PROCESS_HPP__
+#define __FILE_PROCESS_HPP__
 
 /** 
 * Function that gets the data from the input file
@@ -46,4 +46,4 @@ char *read_file(char *fin);
 void write_file(char *fout, char *file);
 
 
-#endif // _FILE_PROCESS_HPP_
+#endif // __FILE_PROCESS_HPP__
