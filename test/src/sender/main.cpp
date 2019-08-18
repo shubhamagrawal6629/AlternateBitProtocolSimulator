@@ -23,7 +23,8 @@
 #include "../../../include/sender_cadmium.hpp"
 
 #define SENDER_OUTPUTFILE_PATH "../test/data/sender/sender_test_output.txt"
-#define SENDER_INPUTFILE_PATH "../test/data/sender/sender_input_test.txt"
+#define SENDER_INPUTFILE_PATH "../test/data/sender/sender_input_test_control_In.txt"
+#define SENDER_ACKFILE_PATH "../test/data/sender/sender_input_test_ack_In.txt"
 #define SENDER_MODIFIED_PATH "../test/data/sender/sender_test_proc.txt"
 using namespace std;
 
@@ -119,8 +120,8 @@ int main() {
             <ApplicationGen, TIME, const char*>(
                 "generator_con" , std::move(i_input_data_control));
 
-    string input_data_ack =
-        "../test/data/sender/sender_input_test_ack_In.txt";
+
+    string input_data_ack = SENDER_ACKFILE_PATH;
     const char* i_input_data_ack = input_data_ack.c_str();
 
     std::shared_ptr<cadmium::dynamic::modeling::model> generator_ack =
