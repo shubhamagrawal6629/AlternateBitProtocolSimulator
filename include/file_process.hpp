@@ -13,7 +13,7 @@
  * 00:00:36:000   1      out                 subnet2  
 */
 /* Peter Bliznyuk-Kvitko
-* Carleton University
+ * Carleton University
 */
 
 #ifndef __FILE_PROCESS_HPP__
