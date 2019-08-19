@@ -24,6 +24,10 @@ This software is a simulator to replicate the behavior of the Alternating Bit Pr
 - **Subnets** - It just transmits the packets to next node after a time delay.
 - **Receiver** - It receives the data and sends back acknowledgement after certain perios of time.
 
+We have added a new module named Repeater that that takes input from subnet and after processing it send it to the receiver and get acknowledgement from receiver and forward it to sender after processing it.
+
+Repeater has 2 inputs and 2 outputs port for packet and acknowledgement respectively. It adds a 10 second processing time to packets and send it to respective output ports
+
 ### FILES ORGANIZATION
 ---
 ##### data [This folder contains the data files for the simulator]
@@ -31,30 +35,38 @@ This software is a simulator to replicate the behavior of the Alternating Bit Pr
     -   input_abp_0.txt
     -    input_abp_1.txt
 2. output
+	-	abp_output.txt
 	-	abp_output_0.txt
 	-	abp_output_1.txt
+	-	abp_proc.txt
 
 ##### doc [This folder contains the documentation for the project]
 1. alternatebitprot.pdf
 2. Cadmium_Documentation_Ubuntu.pdf
 3. Cadmium_Windows.pdf
+4. Doxygen_files.zip
+5. Doxygen_files_receiver.zip
+6. doxygen_html_cadmium_headers.zip
+7. doxygen_html_receiver_sender.zip
 
 ##### include[This folder contains the header files]
-1. message.hpp
-2. receiver_cadmium.hpp
-3. sender_cadmium.hpp
-4. subnet_cadmium.hpp
+1. file_process.hpp
+2. message.hpp
+3. receiver_cadmium.hpp
+4. repeater_cadmium.hpp
+5. sender_cadmium.hpp
+6. subnet_cadmium.hpp
 
 ##### lib [This folder contains 3rd party libraries needed in the project]
-1. cadmium-master[This folder contains cadmium library files]
-2. DESTimes-master[This folder contains DesTimes library files]
-3. vendor[this folder contains third party vendor files]
-	-	iestream.hpp
-	-	nd_time.hpp
+1. cadmium[This folder contains cadmium library files as submodules]
+2. DESTimes[This folder contains DesTimes library files as submodules]
+3. iestream.hpp
+
 
 ##### src [This folder contains the source files written in c++ for the project]
-1. main.cpp
-2. message.cpp
+1. file_process.cpp
+2. main.cpp
+3. message.cpp
 
 ##### test [This folder the unit test for the different include files]
 1. data [This folder contains the data files for test folder]
@@ -62,15 +74,18 @@ This software is a simulator to replicate the behavior of the Alternating Bit Pr
    1.1.receiver
     -    receiver_input_test.txt
 	-	receiver_test_output.txt
+	- 	receiver_test_proc.txt
 
     1.2.sender
 	-	sender_input_test_ack_In.txt
 	-   sender_input_test_control_In.txt
 	-   sender_test_output.txt
+	-   sender_test_proc.txt
 
     1.3.subnet
 	-   subnet_input_test.txt
 	-   subnet_test_output.txt
+	-   subnet_test_proc.txt
 2. src [This folder contains the source files written in c++ for test folder]
 
     2.1.receiver
@@ -89,15 +104,23 @@ To refer working of Alternate Bit Protocol(ABP) in project look into alternatebi
 There are some third party libraries that needs to be installed to run the simulator and steps to install those libraries are
 given in [document](https://github.com/shubhamagrawal6629/AlternateBitProtocolSimulator/tree/master/doc) folder.
 
-1.Update include paths in all the makefiles in this folder and subfolders. You need to update the following lines:
+**1. To download the submodule files to use those libraries perform the following steps**
+1. Clone the github repository using terminal or cmd using following command
+>               git clone <link to repository>
+2. If the repository is not the one that contains the submodules then make a pull request to that repository using
+>               git pull origin [repository-name]
+3. Once in the repository with submodules type in
+>               git submodule update --init --recursive
 
-1. INCLUDECADMIUM=-I lib/cadmium-master/include
+**2. Update include paths in all the makefiles in this folder and subfolders. You need to update the following lines:**
+
+1. INCLUDECADMIUM=-I lib/cadmium/include
 2. Update the relative path to cadmium/include from the folder where the makefile is. You need to take into account where you copied the folder during the installation process
->               Example: INCLUDECADMIUM=-I lib/cadmium-master/include
+>               Example: INCLUDECADMIUM=-I lib/cadmium/include
 
-2.Run the unit tests
+**3. Run the unit tests**
 
-2.1. Run subnet test
+3.1. Run subnet test
 
 1. Open the terminal.
 2. To compile the test, type in the terminal:
@@ -109,10 +132,11 @@ given in [document](https://github.com/shubhamagrawal6629/AlternateBitProtocolSi
 5. For windows system type
 >               ./SUBNET_TEST.exe
 6. To check the output of the test, open  **"../test/data/subnet_test_output.txt"**
+7. To check the modified ouput that is more understandable, open **"../test/data/subnet_test_proc.txt"**
 
-2.2. To run receiver and sender tests, the steps are analogous to 2.1
+3.2. To run receiver and sender tests, the steps are analogous to 2.1
 
-3.Run the simulator
+**4. Run the simulator**
 
 1. Open the terminal.
 2. To compile the project, type in the terminal:
@@ -124,11 +148,10 @@ given in [document](https://github.com/shubhamagrawal6629/AlternateBitProtocolSi
 5. And for windows system type
 >               ./ABP.exe ../data/input/input_abp_1.txt
 6. To check the output of the simulation, open  **"../data/output/abp_output.txt"**
-7.  To execute the simulator with different inputs
+7. To check the modified ouput that is more understandable, open  **"../data/output/abp_proc.txt"**
+8.  To execute the simulator with different inputs
     1. Create new .txt files with the same structure as input_abp_0.txt or input_abp_1.txt
 	2. Run the simulator using the instructions in step 4
 	3. If you want to keep the output, rename abp_output.txt. To do so, move to the data/output folder by typing **"cd ../data/output"** in the terminal and then type :
 >                       "mv abp_output.txt NEW_NAME"
 >                       Example: mv abp_output.txt abp_output_0.txt
-
-
