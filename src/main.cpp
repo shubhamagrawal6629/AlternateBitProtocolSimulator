@@ -35,8 +35,8 @@
 #include <cadmium/logger/common_loggers.hpp>
 
 
-#include "../lib/vendor/nd_time.hpp"
-#include "../lib/vendor/iestream.hpp"
+#include "../lib/DESTimes/include/NDTime.hpp"
+#include "../lib/iestream.hpp"
 
 #include "../include/message.hpp"
 #include "../include/file_process.hpp"
@@ -46,6 +46,8 @@
 #include "../include/subnet_cadmium.hpp"
 #include "../include/repeater_cadmium.hpp"
 
+#define ABP_OUTPUTFILE_PATH "../data/output/abp_output.txt"
+#define ABP_MODIFIED_PATH "../data/output/abp_proc.txt"
 
 using namespace std;
 
@@ -92,8 +94,8 @@ int main(int argc, char ** argv) {
     auto start = hclock::now(); //to measure simulation execution time
 
     cout << " Program start\n";
-    char out_file[] = "../data/output/abp_output.txt";
-    char proc_file[] = "../data/output/abp_proc_repeater.txt";
+    char out_file[] = ABP_OUTPUTFILE_PATH;
+    char proc_file[] = ABP_MODIFIED_PATH;
 
 /*************** Loggers *******************/
     static std::ofstream out_data(out_file);

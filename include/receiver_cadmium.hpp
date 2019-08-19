@@ -1,17 +1,16 @@
 /** \brief This header file implements the Receiver class.
-*
-* The receiver receives the message on input port
-* and sends acknowledgement after fixed delay on output port.
-*
-* The receiver has two phases: passive and active.
-* It is in passive phase initially. When it receives
-* a packet, it will go to active phase, send out
-* the acknowledgement and go to passive state again.
+ *
+ * The receiver receives the message on input port
+ * and sends acknowledgement after fixed delay on output port.
+ *
+ * The receiver has two phases: passive and active.
+ * It is in passive phase initially. When it receives
+ * a packet, it will go to active phase, send out
+ * the acknowledgement and go to passive state again.
 */
 /* 
 * Cristina Ruiz Martin
 * ARSLab - Carleton University
-*
 */
 
 
@@ -39,7 +38,7 @@ using namespace cadmium;
 using namespace std;
 
 /** 
-* Structure that holds input and output messages.
+ * Structure that holds input and output messages.
 */
 struct receiver_defs {
     struct out : public out_port<Message_t> {
@@ -49,7 +48,7 @@ struct receiver_defs {
 };
 
 /** 
-* The Receiver class receives message and sends out acknowledgement.
+ * The Receiver class receives message and sends out acknowledgement.
 */
 template<typename TIME>
 class Receiver {
@@ -58,11 +57,11 @@ class Receiver {
     public:
         TIME PREPARATION_TIME;   /**< Constant that holds the time delay */
                                  /**< from input to output. */
-                                 /*!<Time delay constant.*/
+                                 //!<Time delay constant.
         
         /** 
-        * Constructor for Receiver class.
-        * Initializes the delay constant and state structure.
+         * Constructor for Receiver class.
+         * Initializes the delay constant and state structure.
         */
         Receiver() noexcept {
             PREPARATION_TIME  = TIME("00:00:10");
@@ -71,7 +70,7 @@ class Receiver {
         }
             
         /**
-        * Structure that holds acknowledge number and receiver state.
+         * Structure that holds acknowledge number and receiver state.
         */
         struct state_type {
             int ack_num;   /**< Alternating bit retrieved from the message */
@@ -88,21 +87,21 @@ class Receiver {
         using output_ports = std::tuple<typename defs::out>;
 
         /**
-        * Function that performs the internal transition.
-        * It turns off the receiver sending state.
+         * Function that performs the internal transition.
+         * It turns off the receiver sending state.
         */
         void internal_transition() {
             state.sending = false; 
         }
 
         /**
-        * Function that performs external transition.
-        * Retrieves the messages: if the number of messages
-        * is more than 1, it asserts that only one message is
-        * expected per time unit. It then sets the acknowledge
-        * to the message value and sending state to true.
-        * @param e time variable
-        * @param mbs message bags
+         * Function that performs external transition.
+         * Retrieves the messages: if the number of messages
+         * is more than 1, it asserts that only one message is
+         * expected per time unit. It then sets the acknowledge
+         * to the message value and sending state to true.
+         * @param e time variable
+         * @param mbs message bags
         */
         void external_transition(TIME e,
             typename make_message_bags<input_ports>::type mbs) { 
@@ -116,10 +115,10 @@ class Receiver {
         }
 
         /** 
-        * Function that calls internal transition
-        * followed by external transition.
-        * @param e the first argument
-        * @param mbs the second argument
+         * Function that calls internal transition
+         * followed by external transition.
+         * @param e the first argument
+         * @param mbs the second argument
         */
         void confluence_transition(TIME e,
             typename make_message_bags<input_ports>::type mbs) {
@@ -128,10 +127,10 @@ class Receiver {
         }
 
         /**
-        * Function that sends the acknowledge to the output port.
-        * The acknowledge is calculated as remainder of message value
-        * divided by 10. 
-        * @return Message bags
+         * Function that sends the acknowledge to the output port.
+         * The acknowledge is calculated as remainder of message value
+         * divided by 10. 
+         * @return Message bags
         */
         typename make_message_bags<output_ports>::type output() const {
             typename make_message_bags<output_ports>::type bags;
@@ -142,12 +141,12 @@ class Receiver {
         }
 
         /**
-        * Function with no parameters that sets
-        * the next internal transition time.
-        * If the current state is sending then the next internal 
-        * time is set to PREPARATION_TIME. Otherwise it is set
-        * to infinity.        
-        * @return Next internal time
+         * Function with no parameters that sets
+         * the next internal transition time.
+         * If the current state is sending then the next internal 
+         * time is set to PREPARATION_TIME. Otherwise it is set
+         * to infinity.        
+         * @return Next internal time
         */
         TIME time_advance() const {  
             TIME next_internal;
@@ -161,10 +160,10 @@ class Receiver {
         }
 
         /**
-        * Function that outputs acknowledge number to ostring stream.
-        * @param os the ostring stream
-        * @param i structure state_type
-        * @return os the ostring stream
+         * Function that outputs acknowledge number to ostring stream.
+         * @param os the ostring stream
+         * @param i structure state_type
+         * @return os the ostring stream
         */
         friend std::ostringstream& operator<<(std::ostringstream& os, 
             const typename Receiver<TIME>::state_type& i) {

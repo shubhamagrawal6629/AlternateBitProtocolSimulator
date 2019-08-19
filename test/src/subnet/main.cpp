@@ -14,8 +14,8 @@
 #include <cadmium/logger/common_loggers.hpp>
 
 
-#include "../../../lib/vendor/nd_time.hpp"
-#include "../../../lib/vendor/iestream.hpp"
+#include "../../../lib/DESTimes/include/NDTime.hpp"
+#include "../../../lib/iestream.hpp"
 
 #include "../../../include/message.hpp"
 #include "../../../include/file_process.hpp"
@@ -24,6 +24,7 @@
 
 #define SUBNET_OUTPUT_FILEPATH "../test/data/subnet/subnet_test_output.txt"
 #define SUBNET_INPUT_FILEPATH "../test/data/subnet/subnet_input_test.txt"
+#define SUBNET_MODIFIED_FILEPATH "../test/data/subnet/subnet_test_proc.txt"
 using namespace std;
 
 using hclock = chrono::high_resolution_clock;
@@ -52,8 +53,8 @@ class ApplicationGen : public iestream_input<Message_t,T> {
 
 int main() {
     auto start = hclock::now(); //to measure simulation execution time
-    char out_file[] = "../test/data/subnet/subnet_test_output.txt";
-    char proc_file[] = "../test/data/subnet/subnet_test_proc.txt";
+    char out_file[] = SUBNET_OUTPUT_FILEPATH;
+    char proc_file[] = SUBNET_MODIFIED_FILEPATH;
 
     /*************** Loggers *******************/
     static std::ofstream out_data(

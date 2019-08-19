@@ -1,25 +1,24 @@
 /** \brief This header file implements the Sender class.
-*
-* The sender sends messages on the output port
-* and receives acknowledgement on the input port.
-*
-* The sender goes from initial passive phase
-* to active when an external signal is received.
-* Once activated it sends the packet with the
-* alternating bit. Every time a packet is sent,
-* it waits for an acknowledgement during a specific
-* wait time. If the acknowledgement does not arrive
-* within the time window, the sender will resend the 
-* previous packet with the alternating bit. If the 
-* expected acknowledgement is received within the time
-* window, the sender will send the next packet. When
-* there are no more packets to send, the sender will
-* go again to the passive state. 
+ *
+ * The sender sends messages on the output port
+ * and receives acknowledgement on the input port.
+ *
+ * The sender goes from initial passive phase
+ * to active when an external signal is received.
+ * Once activated it sends the packet with the
+ * alternating bit. Every time a packet is sent,
+ * it waits for an acknowledgement during a specific
+ * wait time. If the acknowledgement does not arrive
+ * within the time window, the sender will resend the 
+ * previous packet with the alternating bit. If the 
+ * expected acknowledgement is received within the time
+ * window, the sender will send the next packet. When
+ * there are no more packets to send, the sender will
+ * go again to the passive state. 
 */
 /* 
 * Cristina Ruiz Martin
 * ARSLab - Carleton University
-*
 */
 
 #ifndef __SENDER_CADMIUM_HPP__
@@ -46,7 +45,7 @@ using namespace cadmium;
 using namespace std;
 
 /** 
-* Structure that holds input and output messages.
+ * Structure that holds input and output messages.
 */
 struct sender_defs {
     struct packet_sent_out : public out_port<Message_t> {
@@ -62,7 +61,7 @@ struct sender_defs {
 };
 
 /** 
-* The Sender class sends out messages and receives acknowledges.
+ * The Sender class sends out messages and receives acknowledges.
 */
 template<typename TIME>
 class Sender {
@@ -71,14 +70,14 @@ class Sender {
     public:
         TIME PREPARATION_TIME;    /**< Constant that holds the time delay */
                                   /**< from acknowledge to output. */
-                                  /*!<Time delay constant.*/
+                                  //!<Time delay constant.
         TIME TIMEOUT;             /**< Constant that holds the timeout delay */
                                   /**< from output to acknowledge. */
-                                  /*!<Timeout constant.*/
+                                  //!<Timeout constant.
         
         /** 
-        * Constructor for Sender class.
-        * Initializes the delay constants and state structure.
+         * Constructor for Sender class.
+         * Initializes the delay constants and state structure.
         */
         Sender() noexcept {
             PREPARATION_TIME = TIME("00:00:10");
@@ -89,16 +88,16 @@ class Sender {
         }
             
         /**
-        * Structure that holds the state variables.
+         * Structure that holds the state variables.
         */
         struct state_type {
-            bool ack;              /*!< Acknowledge bit: true - acknowledge.*/
-            int packet_num;        /*!< Packet Number to be sent.*/
-            int total_packet_num;  /*!< Total Packet Number.*/
-            int alt_bit;           /*!< Alternating Bit.*/
-            bool sending;          /*!< State: true - sending.*/
-            bool model_active;     /*!< True - model is active.*/
-            TIME next_internal;    /*!< Time of next internal transition.*/
+            bool ack;              //!< Acknowledge bit: true - acknowledge.
+            int packet_num;        //!< Packet Number to be sent.
+            int total_packet_num;  //!< Total Packet Number.
+            int alt_bit;           //!< Alternating Bit.
+            bool sending;          //!< State: true - sending.
+            bool model_active;     //!< True - model is active.
+            TIME next_internal;    //!< Time of next internal transition.
         }; 
         state_type state;
             
@@ -109,8 +108,8 @@ class Sender {
         typename defs::ack_received_out, typename defs::data_out>;
         
         /**
-        * Function that performs internal transition.
-        * It sets the next state based on the current state.
+         * Function that performs internal transition.
+         * It sets the next state based on the current state.
         */
         void internal_transition() {
             if (state.ack) {
@@ -143,14 +142,14 @@ class Sender {
         }
 
         /**
-        * Function that performs external transition.
-        * Retrieves the messages: if the number of messages
-        * is more than 1, it asserts that only one message is
-        * expected per time unit. After that it determines
-        * and sets the next state based on the current state.
-        * It also sets the time of next internal transition. 
-        * @param e time variable
-        * @param mbs message bags
+         * Function that performs external transition.
+         * Retrieves the messages: if the number of messages
+         * is more than 1, it asserts that only one message is
+         * expected per time unit. After that it determines
+         * and sets the next state based on the current state.
+         * It also sets the time of next internal transition.
+         * @param e time variable
+         * @param mbs message bags
         */
         void external_transition(TIME e,
             typename make_message_bags<input_ports>::type mbs) { 
@@ -193,10 +192,10 @@ class Sender {
         }
 
         /** 
-        * Function that calls internal transition
-        * followed by external transition.
-        * @param e time variable
-        * @param mbs message bags
+         * Function that calls internal transition
+         * followed by external transition.
+         * @param e time variable
+         * @param mbs message bags
         */
         void confluence_transition(TIME e,
             typename make_message_bags<input_ports>::type mbs) {
@@ -205,15 +204,15 @@ class Sender {
         }
 
         /**
-        * Function that sends the packet to the output port.
-        * When in sending state, the packet is calculated as
-        * packet number multiplied by 10 + alternating bit
-        * and assigned to output. The output is then pushed
-        * to message bags.
-        * When in acknowledge state, the alt_bit is 
-        * assigned to output and the output is pushed
-        * to message bags.
-        * @return Message bags
+         * Function that sends the packet to the output port.
+         * When in sending state, the packet is calculated as
+         * packet number multiplied by 10 + alternating bit
+         * and assigned to output. The output is then pushed
+         * to message bags.
+         * When in acknowledge state, the alt_bit is
+         * assigned to output and the output is pushed
+         * to message bags.
+         * @return Message bags
         */
         typename make_message_bags<output_ports>::type output() const {
             typename make_message_bags<output_ports>::type bags;
@@ -234,20 +233,20 @@ class Sender {
         }
 
         /**
-        * Function with no parameters that returns the next 
-        * internal transition time.
-        * @return Next internal time
+         * Function with no parameters that returns the next
+         * internal transition time.
+         * @return Next internal time
         */
         TIME time_advance() const {  
             return state.next_internal;
         }
 
         /**
-        * Function that outputs packet number and 
-        * total packet number to ostring stream.
-        * @param os the ostring stream
-        * @param i structure state_type
-        * @return os the ostring stream
+         * Function that outputs packet number and
+         * total packet number to ostring stream.
+         * @param os the ostring stream
+         * @param i structure state_type
+         * @return os the ostring stream
         */
         friend std::ostringstream& operator<<(std::ostringstream& os,
             const typename Sender<TIME>::state_type& i) {
