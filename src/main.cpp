@@ -14,16 +14,18 @@
 #include <cadmium/logger/common_loggers.hpp>
 
 
-#include "../lib/vendor/nd_time.hpp"
-#include "../lib/vendor/iestream.hpp"
+#include "../lib/DESTimes/include/NDTime.hpp"
+#include "../lib/iestream.hpp"
 
 #include "../include/message.hpp"
+#include "../include/file_process.hpp"
 
 #include "../include/sender_cadmium.hpp"
 #include "../include/receiver_cadmium.hpp"
 #include "../include/subnet_cadmium.hpp"
 
 #define ABP_OUTPUTFILE_PATH "../data/output/abp_output.txt"
+#define ABP_MODIFIED_PATH "../data/output/abp_proc.txt"
 using namespace std;
 
 using hclock=chrono::high_resolution_clock;
@@ -62,8 +64,12 @@ int main(int argc, char ** argv) {
 
   auto start = hclock::now(); //to measure simulation execution time
 
+  char out_file[] = ABP_OUTPUTFILE_PATH;
+  char proc_file[] = ABP_MODIFIED_PATH;
+  
 /*************** Loggers *******************/
-  static std::ofstream out_data(ABP_OUTPUTFILE_PATH);
+  static std::ofstream out_data(out_file);
+  
     struct oss_sink_provider{
         static std::ostream& sink(){          
             return out_data;
@@ -209,5 +215,8 @@ std::shared_ptr<cadmium::dynamic::modeling::coupled<TIME>> TOP = std::make_share
     r.run_until(NDTime("04:00:00:000"));
     auto elapsed = std::chrono::duration_cast<std::chrono::duration<double, std::ratio<1>>>(hclock::now() - start).count();
     cout << "Simulation took:" << elapsed << "sec" << endl;
+	
+    output_file_process(out_file, proc_file);
+	
     return 0;
 }
