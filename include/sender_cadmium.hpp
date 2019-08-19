@@ -17,7 +17,7 @@
  * go again to the passive state. 
 */
 /* Cristina Ruiz Martin
-* ARSLab - Carleton University
+ * ARSLab - Carleton University
 */
 
 #ifndef __SENDER_CADMIUM_HPP__
