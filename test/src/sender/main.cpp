@@ -14,8 +14,8 @@
 #include <cadmium/logger/common_loggers.hpp>
 
 
-#include "../../../lib/vendor/nd_time.hpp"
-#include "../../../lib/vendor/iestream.hpp"
+#include "../../../lib/DESTimes/include/NDTime.hpp"
+#include "../../../lib/iestream.hpp"
 
 #include "../../../include/message.hpp"
 #include "../../../include/file_process.hpp"
@@ -24,6 +24,8 @@
 
 #define SENDER_OUTPUTFILE_PATH "../test/data/sender/sender_test_output.txt"
 #define SENDER_INPUTFILE_PATH "../test/data/sender/sender_input_test_control_In.txt"
+#define SENDER_ACKFILE_PATH "../test/data/sender/sender_input_test_ack_In.txt"
+#define SENDER_MODIFIED_PATH "../test/data/sender/sender_test_proc.txt"
 using namespace std;
 
 using hclock = chrono::high_resolution_clock;
@@ -56,8 +58,8 @@ class ApplicationGen : public iestream_input<Message_t,T> {
 int main() {
 
     auto start = hclock::now(); //to measure simulation execution time
-    char out_file[] = "../test/data/sender/sender_test_output.txt";
-    char proc_file[] = "../test/data/sender/sender_test_proc.txt";
+    char out_file[] = SENDER_OUTPUTFILE_PATH;
+    char proc_file[] = SENDER_MODIFIED_PATH;
 
     /*************** Loggers *******************/
     static std::ofstream out_data(
@@ -119,8 +121,7 @@ int main() {
             <ApplicationGen, TIME, const char*>(
                 "generator_con" , std::move(i_input_data_control));
 
-    string input_data_ack =
-        "../test/data/sender/sender_input_test_ack_In.txt";
+    string input_data_ack = SENDER_ACKFILE_PATH;
     const char* i_input_data_ack = input_data_ack.c_str();
 
     std::shared_ptr<cadmium::dynamic::modeling::model> generator_ack =
