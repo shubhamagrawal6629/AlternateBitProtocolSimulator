@@ -9,7 +9,7 @@
  * data and goes to passive state when no data
  * is being send or acknowledged
  *
- */
+*/
  /*
  * Cristina Ruiz Martin
  * ARSLab - Carleton University
