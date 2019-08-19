@@ -8,7 +8,7 @@
  * It creates different models to seperate all the operations
  * that are performed.
  *
- */
+*/
 
 #include <iostream>
 #include <chrono>
@@ -26,8 +26,8 @@
 #include <cadmium/logger/common_loggers.hpp>
 
 
-#include "../../../lib/vendor/nd_time.hpp"
-#include "../../../lib/vendor/iestream.hpp"
+#include "../../../lib/DESTimes/include/NDTime.hpp"
+#include "../../../lib/iestream.hpp"
 
 #include "../../../include/message.hpp"
 
@@ -36,6 +36,7 @@
 
 #define RECEIVER_OUTPUTFILE_PATH "../test/data/receiver/receiver_test_output.txt"
 #define RECEIVER_INPUTFILE_PATH "../test/data/receiver/receiver_input_test.txt"
+#define RECEIVER_MODIFIED_PATH "../test/data/receiver/receiver_test_proc.txt"
 using namespace std;
 
 using hclock = chrono::high_resolution_clock;
@@ -57,7 +58,7 @@ struct outp : public cadmium::out_port<Message_t> {};
  * This is class for application generator that takes
  * the file path as parameter and waits for input
  * @param T  message
- */
+*/
 template<typename T>
 class ApplicationGen : public iestream_input<Message_t,T> {
     public:
@@ -67,7 +68,7 @@ class ApplicationGen : public iestream_input<Message_t,T> {
          * that takes input the path of the file that has the input
          * for application to run
          * @param file_path
-         */
+        */
         ApplicationGen(const char* file_path) :
                 iestream_input<Message_t,T>(file_path) {
     }
@@ -77,8 +78,8 @@ class ApplicationGen : public iestream_input<Message_t,T> {
 int main() {
 
     auto start = hclock::now(); //to measure simulation execution time
-    char out_file[] = "../test/data/receiver/receiver_test_output.txt";
-    char proc_file[] = "../test/data/receiver/receiver_test_proc.txt";
+    char out_file[] = RECEIVER_OUTPUTFILE_PATH;
+    char proc_file[] = RECEIVER_MODIFIED_PATH;
 
     /*************** Loggers *******************/
     static std::ofstream out_data(
@@ -94,7 +95,7 @@ int main() {
      * Here cadmium and Destimes library functions are used
      * to generate the log files in a formatted way and to store
      * them in variables and later just log them together to the file
-     */
+    */
     using
         info = cadmium::logger::logger<cadmium::logger::logger_info,
             cadmium::dynamic::logger::formatter<TIME>,
@@ -134,7 +135,7 @@ int main() {
     /**
      * It gets the input text file for execution of the simulation
      * process for the receiver
-     */
+    */
     string input_data_control = RECEIVER_INPUTFILE_PATH;
     const char* i_input_data_control = input_data_control.c_str();
 
@@ -143,7 +144,7 @@ int main() {
      * here the generator as been initialized that takes into
      * consideration the output file, Time and then according to input
      * generates the output
-     */
+    */
     std::shared_ptr<cadmium::dynamic::modeling::model>
         generator = cadmium::dynamic::translate::make_dynamic_atomic_model
             <ApplicationGen, TIME, const char*>
@@ -151,7 +152,7 @@ int main() {
 
     /**
      * This helps in identifying the output data is coming from receiver1
-     */
+    */
 
     std::shared_ptr<cadmium::dynamic::modeling::model>
         receiver1 = cadmium::dynamic::translate::make_dynamic_atomic_model
@@ -162,7 +163,7 @@ int main() {
      * All these over here are to store the values for
      * operations that have been performed for a time frame
      * and then accordingly store in output file
-     */
+    */
     cadmium::dynamic::modeling::Ports iports_TOP = {};
     cadmium::dynamic::modeling::Ports oports_TOP = {
         typeid(outp)
@@ -194,7 +195,7 @@ int main() {
      * In this model, runner are created and also the time to create
      * them are measured. Once runners are created simulation starts and
      * simulation runs until 04:00:00:000 time
-     */
+    */
 
     auto elapsed1 = std::chrono::duration_cast<std::chrono::duration
         <double,std::ratio<1>>> (hclock::now() - start).count();
