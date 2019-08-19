@@ -18,8 +18,8 @@
 #include "../../../lib/iestream.hpp"
 
 #include "../../../include/message.hpp"
-#include "../../../include/file_process.hpp"
 
+#include "../../../include/file_process.hpp"
 #include "../../../include/sender_cadmium.hpp"
 
 #define SENDER_OUTPUTFILE_PATH "../test/data/sender/sender_test_output.txt"
@@ -64,7 +64,6 @@ int main() {
     /*************** Loggers *******************/
     static std::ofstream out_data(
         out_file);
-
     struct oss_sink_provider {
         static std::ostream& sink() {
             return out_data;
