@@ -10,8 +10,7 @@
  * is being send or acknowledged
  *
 */
- /*
- * Cristina Ruiz Martin
+/* Cristina Ruiz Martin
  * ARSLab - Carleton University
 */
 
