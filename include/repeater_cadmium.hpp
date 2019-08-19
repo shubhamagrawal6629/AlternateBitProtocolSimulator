@@ -167,7 +167,7 @@ public:
     /**
      * Function that sets the next internal transaction time
      * @return Next internal time
-     */
+    */
     TIME time_advance() const {
 
         TIME next_internal;
@@ -180,6 +180,12 @@ public:
         return next_internal;
     }
 
+    /**
+     * Function that outputs packet num and ack num to ostring stream
+     * @param os the ostring stream
+     * @param i  the structure state type
+     * @return os the ostring stream
+    */
     friend std::ostringstream& operator<<(std::ostringstream& os,
                                           const typename Repeater<TIME>::state_type& i) {
         os << "packetNum: " << i.packet <<
