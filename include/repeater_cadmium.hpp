@@ -114,13 +114,15 @@ public:
     */
     void external_transition(TIME e,
                              typename make_message_bags<input_ports>::type mbs) {
-        if ((get_messages<typename defs::packet_in>(mbs).size()
-            +get_messages<typename defs::ack_in>(mbs).size()) > 1) {
+        if (get_messages<typename defs::packet_in>(mbs).size() > 1) {
             assert(false && "One message at a time");
         }
         for (const auto &x : get_messages<typename defs::packet_in>(mbs)) {
             state.packet = static_cast<int>(x.value);
             state.sending = true;
+        }
+        if (get_messages<typename defs::ack_in>(mbs).size() > 1) {
+            assert(false && "One message at a time");
         }
         for (const auto &x : get_messages<typename defs::ack_in>(mbs)) {
             state.ack_packet = static_cast<int>(x.value);
@@ -156,7 +158,7 @@ public:
             out.value = state.packet;
             get_messages<typename defs::packet_sent_out>(bags).push_back(out);
         }
-        else if(state.ack)
+        if(state.ack)
         {
             out.value = state.ack_packet;
             get_messages<typename defs::ack_received_out>(bags).push_back(out);
