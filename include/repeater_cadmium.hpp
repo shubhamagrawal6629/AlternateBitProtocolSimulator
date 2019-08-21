@@ -158,7 +158,7 @@ public:
             out.value = state.packet;
             get_messages<typename defs::packet_sent_out>(bags).push_back(out);
         }
-        if(state.ack)
+        if (state.ack)
         {
             out.value = state.ack_packet;
             get_messages<typename defs::ack_received_out>(bags).push_back(out);
