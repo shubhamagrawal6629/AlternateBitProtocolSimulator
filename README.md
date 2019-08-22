@@ -20,10 +20,17 @@ Alternating Bit Protocol(ABP) is a communication protocol to ensure reliable tra
 
 This software is a simulator to replicate the behavior of the Alternating Bit Protocol. The ABP simulator consists of 3 components.
 
-- **Sender** - It sends the packet and then waits for acknowledgement from the receiver but if it does not receive the acknowledgement within time window it will resend the packet with alternating bit attached to it so that it can differentiate between the two packets. Once it receives the acknowledgement it will swnd the next packet until it has no more packets to send.
+- **Sender** - It sends the packet and then waits for acknowledgement from the receiver but if it does not receive the acknowledgement within time window it will resend the packet with alternating bit attached to it so that it can differentiate between the two packets. Once it receives the acknowledgement it will send the next packet until it has no more packets to send.
 - **Subnets** - It just transmits the packets to next node after a time delay.
-- **Receiver** - It receives the data and sends back acknowledgement after certain perios of time.
+- **Receiver** - It receives the data and sends back acknowledgement after certain period of time.
 
+![](doc/ABP.png)
+
+We have added a new module named Repeater that that takes input from subnet and after processing it send it to the receiver and get acknowledgement from receiver and forward it to sender after processing it.
+
+Repeater has 2 inputs and 2 outputs port for packet and acknowledgement respectively. It adds a 10 second processing time to packets and send it to respective output ports
+
+![Click to see for image for ABP with repeater](doc/ABP_Repeater.png)
 ### FILES ORGANIZATION
 ---
 ##### data [This folder contains the data files for the simulator]
@@ -49,11 +56,12 @@ This software is a simulator to replicate the behavior of the Alternating Bit Pr
 1. file_process.hpp
 2. message.hpp
 3. receiver_cadmium.hpp
-4. sender_cadmium.hpp
-5. subnet_cadmium.hpp
+4. repeater_cadmium.hpp
+5. sender_cadmium.hpp
+6. subnet_cadmium.hpp
 
 ##### lib [This folder contains 3rd party libraries needed in the project]
-1. cadmium[This folder contains cadmium library files as submodules] 
+1. cadmium[This folder contains cadmium library files as submodules]
 2. DESTimes[This folder contains DesTimes library files as submodules]
 3. iestream.hpp
 
@@ -104,14 +112,13 @@ given in [document](https://github.com/shubhamagrawal6629/AlternateBitProtocolSi
 >               git clone <link to repository>
 2. If the repository is not the one that contains the submodules then make a pull request to that repository using
 >               git pull origin [repository-name]
-3. Once in the repository with submodules type in 
+3. Once in the repository with submodules type in
 >               git submodule update --init --recursive
 
-**2. Update include paths in all the makefiles in this folder and subfolders. You need to update the following lines:**
+**2. Update include path for cadmium in the makefile.**
 
-1. INCLUDECADMIUM=-I lib/cadmium/include
-2. Update the relative path to cadmium/include from the folder where the makefile is. You need to take into account where you copied the folder during the installation process
->               Example: INCLUDECADMIUM=-I lib/cadmium/include
+In case If planning to have a different folder structure then update the relative path to cadmium/include in the makefile. You need to take into account where you copied the folder during the installation process. In our case it is in lib folder.
+>               INCLUDECADMIUM=-I lib/cadmium/include
 
 **3. Run the unit tests**
 
@@ -150,5 +157,3 @@ given in [document](https://github.com/shubhamagrawal6629/AlternateBitProtocolSi
 	3. If you want to keep the output, rename abp_output.txt. To do so, move to the data/output folder by typing **"cd ../data/output"** in the terminal and then type :
 >                       "mv abp_output.txt NEW_NAME"
 >                       Example: mv abp_output.txt abp_output_0.txt
-
-

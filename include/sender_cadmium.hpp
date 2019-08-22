@@ -1,7 +1,7 @@
 /** \brief This header file implements the Sender class.
  *
  * The sender sends messages on the output port
- * and receives acknowledge on the input port.
+ * and receives acknowledgement on the input port.
  *
  * The sender goes from initial passive phase
  * to active when an external signal is received.
@@ -16,8 +16,9 @@
  * there are no more packets to send, the sender will
  * go again to the passive state. 
 */
-/* Cristina Ruiz Martin
- * ARSLab - Carleton University
+/* 
+* Cristina Ruiz Martin
+* ARSLab - Carleton University
 */
 
 #ifndef __SENDER_CADMIUM_HPP__
@@ -80,7 +81,7 @@ class Sender {
         */
         Sender() noexcept {
             PREPARATION_TIME = TIME("00:00:10");
-            TIMEOUT          = TIME("00:00:20");
+            TIMEOUT          = TIME("00:01:00");
             state.alt_bit    = 0;
             state.next_internal    = std::numeric_limits<TIME>::infinity();
             state.model_active     = false;
@@ -146,7 +147,7 @@ class Sender {
          * is more than 1, it asserts that only one message is
          * expected per time unit. After that it determines
          * and sets the next state based on the current state.
-         * It also sets the time of next internal transition. 
+         * It also sets the time of next internal transition.
          * @param e time variable
          * @param mbs message bags
         */
@@ -208,7 +209,7 @@ class Sender {
          * packet number multiplied by 10 + alternating bit
          * and assigned to output. The output is then pushed
          * to message bags.
-         * When in acknowledge state, the alt_bit is 
+         * When in acknowledge state, the alt_bit is
          * assigned to output and the output is pushed
          * to message bags.
          * @return Message bags
@@ -232,7 +233,7 @@ class Sender {
         }
 
         /**
-         * Function with no parameters that returns the next 
+         * Function with no parameters that returns the next
          * internal transition time.
          * @return Next internal time
         */
@@ -241,7 +242,7 @@ class Sender {
         }
 
         /**
-         * Function that outputs packet number and 
+         * Function that outputs packet number and
          * total packet number to ostring stream.
          * @param os the ostring stream
          * @param i structure state_type

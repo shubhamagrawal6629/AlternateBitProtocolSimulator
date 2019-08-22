@@ -120,7 +120,6 @@ int main() {
             <ApplicationGen, TIME, const char*>(
                 "generator_con" , std::move(i_input_data_control));
 
-
     string input_data_ack = SENDER_ACKFILE_PATH;
     const char* i_input_data_ack = input_data_ack.c_str();
 
