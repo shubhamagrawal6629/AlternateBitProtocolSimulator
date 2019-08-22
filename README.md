@@ -24,7 +24,7 @@ This software is a simulator to replicate the behavior of the Alternating Bit Pr
 - **Subnets** - It just transmits the packets to next node after a time delay.
 - **Receiver** - It receives the data and sends back acknowledgement after certain period of time.
 
-![alt text](https://github.com/shubhamagrawal6629/AlternateBitProtocolSimulator/tree/master/doc/ABP.png)
+![alt text](https://github.com/shubhamagrawal6629/AlternateBitProtocolSimulator/tree/enhancement/doc/ABP.png)
 
 We have added a new module named Repeater that that takes input from subnet and after processing it send it to the receiver and get acknowledgement from receiver and forward it to sender after processing it.
 
