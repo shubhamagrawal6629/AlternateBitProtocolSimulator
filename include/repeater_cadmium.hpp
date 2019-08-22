@@ -52,7 +52,7 @@ struct repeater_defs {
 };
 
 /**
- * The Sender class sends out messages and receives acknowledges.
+ * The Repeater class sends out messages and acknowledgements to receiver and sender.
 */
 template<typename TIME>
 class Repeater {
