@@ -112,10 +112,9 @@ given in [document](https://github.com/shubhamagrawal6629/AlternateBitProtocolSi
 3. Once in the repository with submodules type in
 >               git submodule update --init --recursive
 
-**2. Update include paths in all the makefiles in this folder and subfolders. You need to update the following lines:**
+**2. Update include path in the makefile. You need to update the following lines:**
 
-1. INCLUDECADMIUM=-I lib/cadmium/include
-2. Update the relative path to cadmium/include from the folder where the makefile is. You need to take into account where you copied the folder during the installation process
+Update the relative path to cadmium/include from the folder where the makefile is. You need to take into account where you copied the folder during the installation process. In our case it is 
 >               Example: INCLUDECADMIUM=-I lib/cadmium/include
 
 **3. Run the unit tests**
