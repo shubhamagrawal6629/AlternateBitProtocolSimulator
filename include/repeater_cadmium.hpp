@@ -62,9 +62,9 @@ public:
     TIME PREPARATION_TIME;    /**< Constant that holds the time delay from acknowledge to output. */ //!<Time delay constant.
 
     /**
-	 * Constructor for Repeater class.
-	 * Initializes the delay constants and state structure.
-	*/
+     * Constructor for Repeater class.
+     * Initializes the delay constants and state structure.
+    */
     Repeater() noexcept {
         PREPARATION_TIME = TIME("00:00:10");
         state.ack    = 0;
@@ -72,9 +72,9 @@ public:
     }
 
     /**
-      * Structure that holds the state variables for packet
-      * acknowledgement packet and to check if sending packet
-      * or acknowledgement.
+     * Structure that holds the state variables for packet
+     * acknowledgement packet and to check if sending packet
+     * or acknowledgement.
     */
     struct state_type {
         bool ack;
