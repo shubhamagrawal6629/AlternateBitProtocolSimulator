@@ -14,8 +14,8 @@
  * Carleton University
 */
 
-#ifndef __REPEATER_CADMIUM_H__
-#define __REPEATER_CADMIUM_H__
+#ifndef __REPEATER_CADMIUM_HPP__
+#define __REPEATER_CADMIUM_HPP__
 
 #include <cadmium/modeling/ports.hpp>
 #include <cadmium/modeling/message_bag.hpp>
@@ -196,4 +196,4 @@ public:
     }
 };
 
-#endif //ALTERNATEBITPROTOCOLSIMULATOR_REPEATER_CADMIUM_H
+#endif //ALTERNATEBITPROTOCOLSIMULATOR_REPEATER_CADMIUM_HPP
