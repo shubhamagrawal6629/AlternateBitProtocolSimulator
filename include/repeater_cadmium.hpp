@@ -171,7 +171,6 @@ public:
      * @return Next internal time
     */
     TIME time_advance() const {
-
         TIME next_internal;
         if(state.sending || state.ack)  {
             next_internal=PREPARATION_TIME;
