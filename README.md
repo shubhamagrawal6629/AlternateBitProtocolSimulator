@@ -114,7 +114,7 @@ given in [document](https://github.com/shubhamagrawal6629/AlternateBitProtocolSi
 
 **2. Update include path for cadmium in the makefile.**
 
-Update the relative path to cadmium/include in the makefile. You need to take into account where you copied the folder during the installation process. In our case it is 
+In case If planning to have a different folder structure then update the relative path to cadmium/include in the makefile. You need to take into account where you copied the folder during the installation process. In our case it is in lib folder.
 >               INCLUDECADMIUM=-I lib/cadmium/include
 
 **3. Run the unit tests**
