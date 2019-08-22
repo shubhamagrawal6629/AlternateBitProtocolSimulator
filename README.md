@@ -31,7 +31,6 @@ We have added a new module named Repeater that that takes input from subnet and 
 Repeater has 2 inputs and 2 outputs port for packet and acknowledgement respectively. It adds a 10 second processing time to packets and send it to respective output ports
 
 ![Click to see for image for ABP with repeater](doc/ABP_Repeater.png)
-
 ### FILES ORGANIZATION
 ---
 ##### data [This folder contains the data files for the simulator]
