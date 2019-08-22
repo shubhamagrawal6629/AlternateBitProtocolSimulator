@@ -22,7 +22,7 @@ This software is a simulator to replicate the behavior of the Alternating Bit Pr
 
 - **Sender** - It sends the packet and then waits for acknowledgement from the receiver but if it does not receive the acknowledgement within time window it will resend the packet with alternating bit attached to it so that it can differentiate between the two packets. Once it receives the acknowledgement it will swnd the next packet until it has no more packets to send.
 - **Subnets** - It just transmits the packets to next node after a time delay.
-- **Receiver** - It receives the data and sends back acknowledgement after certain perios of time.
+- **Receiver** - It receives the data and sends back acknowledgement after certain period of time.
 
 We have added a new module named Repeater that that takes input from subnet and after processing it send it to the receiver and get acknowledgement from receiver and forward it to sender after processing it.
 
